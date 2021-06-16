@@ -78,6 +78,46 @@ public class NewsREST {
         return this.entityManager.find(DBNews.class, id);
     }
 
+
+    //////////////////////////////////////////////////////
+    //delete funktion
+    /*
+    @RequestMapping(path = "news/{id}/delete",
+
+        consumes = MediaType.TEXT_PLAIN_VALUE,
+        method = {RequestMethod.GET,RequestMethod.DELETE, RequestMethod.PUT})
+
+    public HttpStatus delete(@PathVariable("id") final long id) {
+        DBNews news = entityManager.find(DBNews.class, id);
+        entityManager.getTransaction().begin();
+        entityManager.remove(news);
+        entityManager.getTransaction().commit();
+        return HttpStatus.OK;
+    }
+    */
+
+    /*
+    @DeleteMapping("{id}")
+    void deleteNews(@PathVariable Long id) {
+        DBNews news = entityManager.find(DBNews.class, id);
+        entityManager.getTransaction().begin();
+        entityManager.remove(news);
+        entityManager.getTransaction().commit();
+    }
+    */
+
+    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> deleteNews(@PathVariable(value="id") long id) {
+        DBNews news = entityManager.find(DBNews.class, id);
+
+        entityManager.remove(news);
+        return ResponseEntity.ok(true);
+    }
+
+
+
+
+
     // An example of how to misuse the API and do something unRESTful
     @GetMapping(path = "new/{headline}/{content}",
                 consumes = MediaType.TEXT_PLAIN_VALUE,

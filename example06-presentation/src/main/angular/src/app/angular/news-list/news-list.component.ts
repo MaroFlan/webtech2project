@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { News } from '../../news';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'wt2-news-list',
@@ -8,6 +9,11 @@ import { News } from '../../news';
 })
 export class NewsListComponent {
   msg:string;//
+  private url = "http://localhost:4200/rest/news";
+
+  constructor (private httpClient: HttpClient){
+
+  }
 
   @Input()
   public news: News[] = [];
@@ -17,21 +23,21 @@ export class NewsListComponent {
   }
 
 
-
+  //0 ist neueste news, n ist älteste
   clickEvent(){//
+    this.httpClient.get(this.url + "/newest")
+                    .subscribe(response => {
+                          console.log(response); //gibt alle msgs zurück
+                    });
     this.msg='Die Ehre gebührt Chris';
     return this.msg;
   }
 
   deleteEvent(id){
-
-    this.msg = this.news[2].toString();
-    //this.news.splice(0,3);
-    //delete this.news[0];
-    return this.msg;
-
-
-
+  //console.log(this.httpClient);
+    return this.httpClient.delete(this.url + "/" + id)
+                       .subscribe(response => {
+                            console.log(response);
+                        });
   }
-
 }

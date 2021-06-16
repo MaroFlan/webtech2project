@@ -9,7 +9,8 @@
     </div>
     <div>
 
-      <button id="dynamic id" (click)="deleteEvent(this.id)"  class="btn btn-block btn-outline-danger" >delete msg</button>
+
+      <button ng-attr-id="{{'button-news-' + i}}" (click)="deleteEvent(i)"  class="btn btn-block btn-outline-danger" >delete msg</button>
 
     </div>
     <div class="flex-shrink-0">
