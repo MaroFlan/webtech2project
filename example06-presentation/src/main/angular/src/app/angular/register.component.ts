@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //import { RestService } from '../rest.service';
-import { User } from '../user'
+//import { User } from '../user'
 //import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class RegisterComponent {
 
         // lege User an
        // weise eingegebene account daten zu
-
+  /*
         var user: User = {
           username : uName,
           email: email,
@@ -26,7 +26,7 @@ export class RegisterComponent {
           roles: null,
           id: null,
         }
-
+  */
       }
       }
 
