@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
+
 export abstract class AuthService {
+
 
   constructor(protected http: HttpClient) {
   }
@@ -15,4 +18,9 @@ export abstract class AuthService {
   abstract getBaseUrl(): string;
 
   abstract get isLoggedIn(): boolean;
+
+
 }
+
+
+

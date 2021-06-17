@@ -7,10 +7,15 @@ import { map } from 'rxjs/operators';
 import { BasicAuthService } from './basic-auth.service';
 import { AuthService } from './auth.service';
 
+
 @Injectable()
 export class AuthNewsService extends BaseNewsService {
 
   private _authService: AuthService;
+  authUrl = "http://localhost:4200/api/auth/";
+      //rest/auth
+
+
 
   constructor(http: HttpClient) {
     super(http);
@@ -38,4 +43,16 @@ export class AuthNewsService extends BaseNewsService {
   set authService(value: AuthService) {
     this._authService = value;
   }
+
+/*
+    login(model: any) {
+      return this.http.post(`${this._authService.getBaseUrl()}/news`).pipe(
+        map((response: any) => {
+          const user = response;
+          if (user.result.succeeded) {
+            localStorage.setItem('token', user.token);
+          }
+        })
+      )
+    } */
 }

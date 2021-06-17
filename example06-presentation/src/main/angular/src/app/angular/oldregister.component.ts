@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit } from '@angular/core';
 //import { RestService } from '../rest.service';
 //import { User } from '../user'
@@ -27,8 +28,7 @@ export class RegisterComponent {
           id: null,
         }
   */
-      }
-      }
+
 
         /*
         füge Userdaten der Datenbank hinzu und navigiere bei success auf login
@@ -46,5 +46,6 @@ export class RegisterComponent {
         alert("Passwords did not match");
         return;
       }
-    }*/
+    }
 }
+*/
