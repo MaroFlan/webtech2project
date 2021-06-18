@@ -40,6 +40,18 @@ export class AuthNewsService extends BaseNewsService {
     );
   }
 
+  delete(id: number): Observable<News> {
+        return this.http.delete<any>(`${this._authService.getBaseUrl()}/news/${id}`, {headers: this.defaultHeaders}).pipe(
+          map(body => News.fromObject(body))
+        );
+      }
+
+  update(headline: string, content: string, id: number): Observable<News> {
+          return this.http.put<any>(`${this._authService.getBaseUrl()}/news/${id}`, {headline, content}, {headers: this.defaultHeaders}).pipe(
+            map(body => News.fromObject(body))
+          );
+        }
+
   set authService(value: AuthService) {
     this._authService = value;
   }

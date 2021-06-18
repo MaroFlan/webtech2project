@@ -30,4 +30,16 @@ export class SecurityNewsService extends BaseNewsService {
       map(body => News.fromObject(body))
     );
   }
+
+  delete(id: number): Observable<News> {
+        return this.http.delete<any>(`${env.apiUrl}/news/${id}`, {headers: this.defaultHeaders}).pipe(
+          map(body => News.fromObject(body))
+        );
+      }
+
+  update(headline: string, content: string, id: number): Observable<News> {
+          return this.http.put<any>(`${env.apiUrl}/news/${id}`, {headline, content}, {headers: this.defaultHeaders}).pipe(
+            map(body => News.fromObject(body))
+          );
+        }
 }

@@ -13,13 +13,9 @@ import de.ls5.wt2.entity.DBNews;
 import de.ls5.wt2.entity.DBNews_;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Transactional
 @RestController
@@ -46,7 +42,7 @@ public class NewsREST {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
                  produces = MediaType.APPLICATION_JSON_VALUE)
-    public DBNews create(@RequestBody final DBNews param) {
+    public DBNews create(@RequestBody final DBNews param) { //pathvar und requestbody
 
         final DBNews news = new DBNews();
 
@@ -72,10 +68,42 @@ public class NewsREST {
     }
 
     @GetMapping(path = "{id}",
-                consumes = MediaType.TEXT_PLAIN_VALUE,
+               // consumes = MediaType.TEXT_PLAIN_VALUE, //
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public DBNews readAsJSON(@PathVariable("id") final long id) {
+
+        System.out.print("it works");
         return this.entityManager.find(DBNews.class, id);
+    }
+
+
+
+    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> deleteNews(@PathVariable(value="id") long id) {
+        DBNews news = entityManager.find(DBNews.class, id);
+
+        entityManager.remove(news);
+        return ResponseEntity.ok(true);
+    }
+
+    //put request
+    //request body
+
+
+    @PutMapping(path = "/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public DBNews edit( @RequestBody final DBNews param, @PathVariable(value="id") long id) { //pathvar und requestbody
+
+        DBNews news = entityManager.find(DBNews.class, id);
+
+        this.entityManager.getTransaction().begin();
+        news.setHeadline(param.getHeadline());
+        news.setContent(param.getContent());
+        this.entityManager.getTransaction().commit();
+
+
+        return news;
     }
 
 
@@ -106,13 +134,8 @@ public class NewsREST {
     }
     */
 
-    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> deleteNews(@PathVariable(value="id") long id) {
-        DBNews news = entityManager.find(DBNews.class, id);
 
-        entityManager.remove(news);
-        return ResponseEntity.ok(true);
-    }
+
 
 
 

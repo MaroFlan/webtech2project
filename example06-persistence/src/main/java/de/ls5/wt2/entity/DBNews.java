@@ -15,6 +15,7 @@ public class DBNews extends DBIdentified {
     private Date publishedOn;
     private String headline;
     private String content;
+    private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(iso = ISO.DATE_TIME)
@@ -41,5 +42,7 @@ public class DBNews extends DBIdentified {
     public void setContent(String content) {
         this.content = content;
     }
+
+
 }
 
