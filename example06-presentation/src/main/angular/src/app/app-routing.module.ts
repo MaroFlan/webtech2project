@@ -6,7 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { SecurityComponent } from './security/security.component';
 
 const routes: Routes = [
-  { path: 'angular', component: AngularComponent },
+  { path: 'angular', component: AngularComponent},
   { path: 'auth', component: AuthComponent},
   { path: 'security', component: SecurityComponent },
   { path: 'register', component: RegisterComponent},

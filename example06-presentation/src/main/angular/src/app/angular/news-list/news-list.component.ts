@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { News } from '../../news';
 import { HttpClient } from '@angular/common/http';
 import { NewsService } from '../news.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wt2-news-list',
@@ -12,7 +13,7 @@ export class NewsListComponent {
   msg:string;//
   private url = "http://localhost:4200/rest/news";
 
- constructor(private newsService: NewsService) { }
+ constructor(private newsService: NewsService, private router: Router) { }
 
   @Output()
   public deleted = new EventEmitter();
@@ -59,13 +60,11 @@ export class NewsListComponent {
         this.newsService.delete(db_id).subscribe(
           () => {
             this.deleted.emit();
-            window.location.reload();
-
+            //window.location.reload(); //virgin page refresh
+            this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
           },
           () => console.log("Error while deleting")
         );
       }
-
-
 
 }
