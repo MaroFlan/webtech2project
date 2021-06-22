@@ -6,16 +6,18 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="errorMessage = null"></button>
     </div>
 
-    <form (submit)="createNews($event)">
+    <form #f="ngForm" (submit)="createNews($event)">
+
       <div class="mb-3">
         <label class="form-label">Headline</label>
-        <input name="headline" class="form-control" type="text" required [(ngModel)]="headline">
+        <input placeholder="Give your msg an interesting title..." name="headline" class="form-control" type="text" required [(ngModel)]="headline">
       </div>
       <div class="mb-3">
         <label class="form-label">Content <span [ngClass]="getCharsLeft() < 0 ? 'text-danger' : 'text-muted'">({{getCharsLeft()}})</span></label>
-        <textarea name="content" class="form-control" required [(ngModel)]="content"></textarea>
+        <textarea placeholder = "Enter your msg here..." name="content" class="form-control" required [(ngModel)]="content"></textarea>
       </div>
-      <button class="btn btn-block btn-outline-primary" [disabled]="getCharsLeft() < 0">Create News</button>
+      <button class="btn btn-block btn-outline-primary" [disabled]="getCharsLeft() < 0 || f.invalid">Create News</button>
+
     </form>
 
   </div>

@@ -5,12 +5,16 @@
 <div class="list-group" *ngIf="news.length > 0">
   <div class="list-group-item d-flex flex-row" *ngFor="let n of reversedNews; let i = index" [class.list-group-item-primary]="i == 0">
     <div class="w-100 mr-2">
-      <h6 class="mb-0">{{n.headline}} {{n.id}} <span class="badge badge-primary" *ngIf="i == 0">Make-X-Player-Great-Again</span></h6>
+      <h5 class="mb-0">{{n.headline}} <!--{{n.id}}--> <span class="badge badge-warning" *ngIf="i == 0">Latest News</span></h5>
+      <h6 class="mb-0"> {{n.content}}</h6>
     </div>
     <div>
 
       <wt2-update-news>
-
+        <form (submit)="updateNews($event)">
+          <input type="hidden" name="id" value="{{n.id}}"/>
+          <button class="btn btn-block btn-outline-secondary">edit msg</button>
+        </form>
       </wt2-update-news>
 
       <form (submit)="deleteNews($event)">

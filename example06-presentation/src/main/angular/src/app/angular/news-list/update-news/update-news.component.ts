@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { NewsService } from '../news.service';
+import { NewsService } from '../../news.service';
 
 @Component({
   selector: 'wt2-update-news',

@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'security', component: SecurityComponent },
   { path: 'register', component: RegisterComponent},
   { path: '',
-    redirectTo: '/angular',
+    redirectTo: '/auth',
     pathMatch: 'full'
   }
 ];
