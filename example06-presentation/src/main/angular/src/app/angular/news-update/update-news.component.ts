@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { NewsService } from '../../news.service';
+import { NewsService } from '../news.service';
 
 @Component({
-  selector: 'wt2-update-news',
-  templateUrl: './update-news.component.html',
-  styleUrls: ['./update-news.component.sass']
+  selector: 'wt2-news-update',
+  templateUrl: './news-update.component.html',
+  styleUrls: ['./news-update.component.sass']
 })
 export class UpdateNewsComponent {
 

@@ -10,23 +10,16 @@
     </div>
     <div>
 
-      <wt2-update-news>
-        <form (submit)="updateNews($event)">
-           <input type="hidden" name="id2" value="{{n.id}}"/>
-
-        <!--Wie dem edit die neuen infos gut übergeben?
-        <input placeholder="new title" name="headline" class="form-control" type="text">
-        <input placeholder="new msg" name="content" class="form-control" type="text"> -->
-
-        <button class="btn btn-block btn-outline-secondary">edit msg</button>
-      </form>
-
-
-      </wt2-update-news>
-
-      <form (submit)="deleteNews($event)">
+      <form #f="ngForm" (submit)="updateNews($event)">
         <input type="hidden" name="id" value="{{n.id}}"/>
-        <button class="btn btn-block btn-outline-danger" >delete msg</button>
+
+        <!--Wie dem edit die neuen infos gut übergeben?-->
+        <!--nicht die schönste Lösung aber immerhin RESTful. Popup dialoge haben nicht funktioniert. Redirect auf andere Seite wäre unschön-->
+        <input placeholder = "Update title" name="headline" class="form-control" type="text" required [(ngModel)]="headline" >
+        <input placeholder ="Update msg" name="content" class="form-control" type="text" required [(ngModel)]="content">
+        <!--Problem: input text wird in allen update msg blöcken angezeigt.-->
+
+        <button class="btn btn-block btn-outline-secondary" [disabled]="getCharsLeft() < 0 || f.invalid">edit msg</button>
       </form>
 
 
@@ -35,14 +28,25 @@
 
       <small>{{n.publishedOn | date:mediumDate}}</small>
 
-
+      <form (submit)="deleteNews($event)">
+        <input type="hidden" name="id" value="{{n.id}}"/>
+        <button class="btn btn-block btn-outline-danger" >delete msg</button>
+      </form>
 
 
     </div>
+
+
   </div>
 </div>
+
+
+
+
 
 <button (click)="clickEvent()" class="btn btn-block btn-outline-danger" >Button der Hoffnung </button>
 <p>
   {{msg}}
 </p>
+
+

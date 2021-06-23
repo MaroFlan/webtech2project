@@ -82,4 +82,8 @@ export class NewsListComponent {
                 () => console.log("Error while updating")
               );
     }
+
+    getCharsLeft(): number {
+        return 255 - this.content.length; //anpassbar, sodass auch headline länge überprüft wird
+      }
 }
