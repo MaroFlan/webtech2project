@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.sass']
 })
+
 export class NewsListComponent {
   msg:string;//
   private url = "http://localhost:4200/rest/news";
@@ -17,6 +18,10 @@ export class NewsListComponent {
 
   @Output()
   public deleted = new EventEmitter();
+  public updated = new EventEmitter();
+
+  public headline: string = "";
+  public content: string = "";
 
 
   @Input()
@@ -27,26 +32,11 @@ export class NewsListComponent {
   }
 
 
-  //0 ist neueste news, n ist älteste
-  clickEvent(){//
-   // this.httpClient.get(this.url + "/newest")
-     //               .subscribe(response => {
-       //                   console.log(response); //gibt alle msgs zurück
-         //           });
+  clickEvent(){
     this.msg='Die Ehre gebührt Chris';
     return this.msg;
   }
-  /*
-  deleteEvent(id){ //button id ist von position der nachricht abhängig. aber wir brauchen id der nachricht damit keine fehler geschehen
 
-  var db_id= this.news[id].id;
-  //console.log(db_id);
-    return this.httpClient.delete(this.url + "/" + db_id)
-                       .subscribe(response => {
-                            this.deleted.emit();
-                            console.log(response);
-                        });
-  }*/
 
 
 
@@ -67,4 +57,29 @@ export class NewsListComponent {
         );
       }
 
+
+
+    public updateNews(e: Event): void {
+
+      e.preventDefault();
+      //this.headline="yes";
+      //this.content="no";
+
+
+      var db_id= e.target[0].value; //
+      console.log(this.headline);
+      console.log(this.content);
+      console.log(db_id);
+
+
+              this.newsService.update(this.headline, this.content, db_id).subscribe(
+                () => {
+                  this.updated.emit();
+                 // this.headline = "";
+               //   this.content = "";
+                  this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
+                },
+                () => console.log("Error while updating")
+              );
+    }
 }

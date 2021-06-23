@@ -97,11 +97,8 @@ public class NewsREST {
 
         DBNews news = entityManager.find(DBNews.class, id);
 
-        this.entityManager.getTransaction().begin();
         news.setHeadline(param.getHeadline());
         news.setContent(param.getContent());
-        this.entityManager.getTransaction().commit();
-
 
         return news;
     }
