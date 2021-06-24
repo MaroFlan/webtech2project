@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass']
 })
+
 export class RegisterComponent implements OnInit {
 
   private registerResponse;
@@ -21,6 +22,11 @@ export class RegisterComponent implements OnInit {
   register(uName: string, pWord1: string, pWord2: string, email: string, fName: string, lName: string ): void {
         if (pWord1 === pWord2){
 
+        console.log(uName)
+        console.log(pWord1)
+        console.log(email)
+        console.log(fName)
+        console.log(lName)
 
           // lege User an
          // weise eingegebene account daten zu
@@ -56,3 +62,4 @@ export class RegisterComponent implements OnInit {
 
   }
 }
+

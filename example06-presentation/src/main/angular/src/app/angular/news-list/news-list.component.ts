@@ -1,13 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { News } from '../../news';
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { NewsService } from '../news.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'wt2-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.sass']
+  styleUrls: ['./news-list.component.sass'],
+  providers: [NewsService]
 })
 
 export class NewsListComponent {
@@ -36,6 +37,11 @@ export class NewsListComponent {
     this.msg='Die Ehre gebührt Chris';
     return this.msg;
   }
+
+  clickEvent2(){
+      this.msg='Der Hoffnungsträger dient allgegenwertig unter Chris';
+      return this.msg;
+    }
 
 
 

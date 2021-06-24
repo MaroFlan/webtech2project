@@ -4,7 +4,8 @@ import { NewsService } from '../news.service';
 @Component({
   selector: 'wt2-news-update',
   templateUrl: './news-update.component.html',
-  styleUrls: ['./news-update.component.sass']
+  styleUrls: ['./news-update.component.sass'],
+  providers: [NewsService]
 })
 export class UpdateNewsComponent {
 

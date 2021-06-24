@@ -38,7 +38,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
