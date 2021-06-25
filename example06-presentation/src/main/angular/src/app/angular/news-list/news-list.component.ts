@@ -68,8 +68,6 @@ export class NewsListComponent {
     public updateNews(e: Event): void {
 
       e.preventDefault();
-      //this.headline="yes";
-      //this.content="no";
 
 
       var db_id= e.target[0].value; //
@@ -81,9 +79,17 @@ export class NewsListComponent {
               this.newsService.update(this.headline, this.content, db_id).subscribe(
                 () => {
                   this.updated.emit();
-                 // this.headline = "";
-               //   this.content = "";
-                  this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
+
+                 let currentUrl = this.router.url;
+                  console.log(currentUrl);/*
+                      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                          this.router.navigate([currentUrl]);
+                      });*/
+                  this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss
+                //  this.router.navigate([this.router.url])
+
+
+
                 },
                 () => console.log("Error while updating")
               );

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseNewsService } from '../base-news.service';
 import { environment as env } from '../../environments/environment';
+import {User} from '../user';
 
 @Injectable()
 export class NewsService extends BaseNewsService {
@@ -42,4 +43,16 @@ export class NewsService extends BaseNewsService {
           map(body => News.fromObject(body))
         );
       }
+
+    //---------------ab hier user methoden-------------(firstname: string, lastname: string, email: string, username: string, password: string)
+      /*register(user: User): Observable<User> { //link wahrscheinlich nicht ganz korrekt
+                return this.http.post<any>(`http://localhost:4200/rest/simple`, {user}, {headers: this.defaultHeaders}).pipe(
+                  map(body => user)
+                );
+              }*/
+
+      register(user: User): Observable<any>{
+          return this.http.post(`http://localhost:4200/rest/simple`, user);
+
+        }
 }

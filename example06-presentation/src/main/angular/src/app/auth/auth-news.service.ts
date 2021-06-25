@@ -6,6 +6,7 @@ import { News } from '../news';
 import { map } from 'rxjs/operators';
 import { BasicAuthService } from './basic-auth.service';
 import { AuthService } from './auth.service';
+import {User} from '../user';
 
 
 @Injectable()
@@ -13,6 +14,7 @@ export class AuthNewsService extends BaseNewsService {
 
   private _authService: AuthService;
   authUrl = "http://localhost:4200/api/auth/";
+  maybeUrl = "http://localhost:4200/rest/simple";
       //rest/auth
 
 
@@ -56,15 +58,27 @@ export class AuthNewsService extends BaseNewsService {
     this._authService = value;
   }
 
-/*
-    login(model: any) {
-      return this.http.post(`${this._authService.getBaseUrl()}/news`).pipe(
+
+  //---------------ab hier user methoden-------------(firstname: string, lastname: string, email: string, username: string, password: string)
+  register(user: User): Observable<User> {
+            return this.http.post<any>(`${this._authService.getBaseUrl()}/rest/simple`, {user}, {headers: this.defaultHeaders}).pipe(
+              map(body => user)
+            );
+          }
+
+
+  /*
+    login(model: any) { //link anpassen
+      return this.http.post(`${this._authService.getBaseUrl()}/`).pipe(
         map((response: any) => {
           const user = response;
-          if (user.result.succeeded) {
-            localStorage.setItem('token', user.token);
-          }
+          //hier könnte man token implementieren
         })
       )
-    } */
+    }*/
+    /*
+    register(user: User): Observable<any>{
+        return this.http.post(this.accountUrl, user);
+
+      }*/
 }

@@ -12,9 +12,13 @@ import de.ls5.wt2.conf.auth.LogoutFilterWithoutRedirect;
 import de.ls5.wt2.conf.auth.WT2Realm;
 import de.ls5.wt2.conf.auth.jwt.JWTAuthenticationFilter;
 import de.ls5.wt2.conf.auth.jwt.JWTWT2Realm;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.PasswordMatcher;
+import org.apache.shiro.crypto.hash.DefaultHashService;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -75,5 +79,62 @@ public class ShiroConfig {
 
         return shiroFilterFactoryBean;
     }
+
+
+    //----------------take this--------------------------
+  /*  @Bean
+    public Realm realm2() {
+        H2AuthorizingRealm h2AuthorizingRealm = new H2AuthorizingRealm();
+        PasswordMatcher passwordMatcher = new PasswordMatcher();
+        passwordMatcher.setPasswordService(passwordService());
+        h2AuthorizingRealm.setCredentialsMatcher(passwordMatcher);
+        return h2AuthorizingRealm;
+    }
+
+
+    @Bean
+    public WebSecurityManager securityManager(Realm realm) {
+        return new DefaultWebSecurityManager(realm);
+    }
+
+    @Bean
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(WebSecurityManager securityManager) {
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+
+        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
+
+        filters.put("loginFilter", new FormAuthenticationFilterWithoutRedirect());
+        filters.put("logoutFilter", new LogoutFilterWithoutRedirect());
+
+        final Map<String, String> chainDefinition = new LinkedHashMap<>();
+
+        // configuration for using session based authentication
+        chainDefinition.put("/login.jsp", "loginFilter");
+        chainDefinition.put("/logout", "logoutFilter");
+
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(chainDefinition);
+
+        return shiroFilterFactoryBean;
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    //passwort hash
+    /////////////////////////////////////////////////////////////////////////////////
+    @Bean
+    public DefaultPasswordService passwordService() {
+        DefaultPasswordService defaultPasswordService = new DefaultPasswordService();
+        DefaultHashService hashService = new DefaultHashService();
+        hashService.setHashAlgorithmName("SHA-512");
+        hashService.setGeneratePublicSalt(false);
+        hashService.setHashIterations(1024);
+
+        defaultPasswordService.setHashService(hashService);
+        return defaultPasswordService;
+
+    }
+
+*/
 
 }

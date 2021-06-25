@@ -72,7 +72,7 @@ public class NewsREST {
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public DBNews readAsJSON(@PathVariable("id") final long id) {
 
-        System.out.print("it works");
+        //System.out.print("it works");
         return this.entityManager.find(DBNews.class, id);
     }
 

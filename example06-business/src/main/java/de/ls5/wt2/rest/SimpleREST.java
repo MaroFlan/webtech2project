@@ -1,30 +1,90 @@
 package de.ls5.wt2.rest;
 
+import de.ls5.wt2.UserRepository;
+import de.ls5.wt2.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityManager;
 
 @Transactional
 @RestController
 @RequestMapping(path = "rest/simple")
 public class SimpleREST {
 
-    @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
-    public String methodNamesDoNoMatter() {
-        return "Hello World";
+
+    //----Diese Klasse wurde von HelloWorld zum Handlen der User Datenbank befördert
+
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping(produces =  MediaType.APPLICATION_JSON_VALUE)
+    public String[] get(){
+        return new String[] {"value1", "value2"};
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String reallyTheyDontMatter() {
-        return "{\"hello\": \"world\"}";
+
+    //-----------create User-------------
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public User create(@RequestBody final User param) { //pathvar und requestbody
+
+        final User user = new User();
+
+        user.setFirstname(param.getFirstname());
+        user.setLastname(param.getLastname());
+        user.setEmail(param.getEmail());
+        user.setUsername(param.getUsername());
+        user.setPassword(param.getPassword());
+
+        userRepository.save(user);
+
+        return user;
     }
 
-    @PostMapping(path = "withPath",
-                 produces = MediaType.TEXT_PLAIN_VALUE)
-    public String didIAlreadySayTheyDontMatter() {
-        return "Goodbye world";
+    //-----------get a User-------------
+    @GetMapping(path = "{id}",
+            // consumes = MediaType.TEXT_PLAIN_VALUE, //
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getUser(@PathVariable("id") final long id) {
+
+        //System.out.print("it works");
+        return this.userRepository.findById(id);
     }
+
+    //-----------delete User-------------
+    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> deleteUser(@PathVariable(value="id") long id) {
+
+        User user = userRepository.findById(id);
+        userRepository.delete(user);
+
+        return ResponseEntity.ok(true);
+    }
+
+    //-----------edit User-info-------------
+    @PutMapping(path = "/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public User edit( @RequestBody final User param, @PathVariable(value="id") long id) { //pathvar und requestbody
+
+        User user = userRepository.findById(id);
+
+        user.setFirstname(param.getFirstname());
+        user.setLastname(param.getLastname());
+        user.setEmail(param.getEmail());
+        user.setUsername(param.getUsername());
+        user.setPassword(param.getPassword());
+
+        return user;
+    }
+
+
 }

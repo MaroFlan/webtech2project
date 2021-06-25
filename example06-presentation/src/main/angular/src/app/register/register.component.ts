@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../angular/rest.service';
-import { User } from '../user';
+//import { RestService } from '../angular/rest.service';
+import { User } from '../user'; //vllt import nicht richtig, falscher user
 import { Router } from '@angular/router';
+import { NewsService } from '../angular/news.service';
 
 @Component({
   selector: 'wt2-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass']
+  styleUrls: ['./register.component.sass'],
+  providers: [NewsService]
 })
 
 export class RegisterComponent implements OnInit {
 
   private registerResponse;
 
-
-  constructor(private restService: RestService, private router: Router) { }
+  constructor(private newsService: NewsService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -44,10 +45,10 @@ export class RegisterComponent implements OnInit {
 
          // füge Userdaten der Datenbank hinzu und navigiere bei success auf login
 
-          this.restService.register(user).subscribe(response => {
+          this.newsService.register(user).subscribe(response => {
             this.registerResponse = response;
             if (response){
-              this.router.navigate(['/login']); //nav funktioniert noch nicht
+              this.router.navigate(['/auth']); //nav funktioniert noch nicht
             }else {
               alert(response);
             }
@@ -60,6 +61,21 @@ export class RegisterComponent implements OnInit {
         }
 
 
+    /* ----referenz
+    public updateNews(e: Event): void {
+
+
+                  this.newsService.update(this.headline, this.content, db_id).subscribe(
+                    () => {
+                      this.updated.emit();
+                     // this.headline = "";
+                   //   this.content = "";
+                      this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
+                    },
+                    () => console.log("Error while updating")
+                  );
+        }*/
   }
 }
+
 
