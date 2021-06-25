@@ -15,6 +15,7 @@ public class DBNews extends DBIdentified {
     private Date publishedOn;
     private String headline;
     private String content;
+    private long UserId;
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,6 +42,14 @@ public class DBNews extends DBIdentified {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public long getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(long userId) {
+        UserId = userId;
     }
 
 

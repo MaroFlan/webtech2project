@@ -2,6 +2,7 @@ export class News {
   publishedOn: Date;
   headline: string;
   content: string;
+  userId: number;
   id: number;
 
   static fromObject(object: any): News {
@@ -10,6 +11,7 @@ export class News {
     n.content = object.content;
     n.publishedOn = new Date(object.publishedOn);
     n.id = object.id;
+    n.userId = object.userId;
     return n;
   }
 }

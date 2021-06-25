@@ -103,34 +103,9 @@ public class NewsREST {
         return news;
     }
 
-
-    //////////////////////////////////////////////////////
-    //delete funktion
-    /*
-    @RequestMapping(path = "news/{id}/delete",
-
-        consumes = MediaType.TEXT_PLAIN_VALUE,
-        method = {RequestMethod.GET,RequestMethod.DELETE, RequestMethod.PUT})
-
-    public HttpStatus delete(@PathVariable("id") final long id) {
-        DBNews news = entityManager.find(DBNews.class, id);
-        entityManager.getTransaction().begin();
-        entityManager.remove(news);
-        entityManager.getTransaction().commit();
-        return HttpStatus.OK;
-    }
-    */
-
-    /*
-    @DeleteMapping("{id}")
-    void deleteNews(@PathVariable Long id) {
-        DBNews news = entityManager.find(DBNews.class, id);
-        entityManager.getTransaction().begin();
-        entityManager.remove(news);
-        entityManager.getTransaction().commit();
-    }
-    */
-
+    //spring rest basic auth
+    //oder spring rest session
+    //rest soll auth abfrage machen
 
 
 
