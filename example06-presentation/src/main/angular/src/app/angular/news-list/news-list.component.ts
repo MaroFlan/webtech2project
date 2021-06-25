@@ -4,6 +4,7 @@ import { News } from '../../news';
 import { NewsService } from '../news.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'wt2-news-list',
   templateUrl: './news-list.component.html',
@@ -44,7 +45,16 @@ export class NewsListComponent {
       return this.msg;
     }
 
+ public showEdit(id:number){
+    var editForm = document.getElementById('edit-form-' + id);
+    var allEditForms = Array.from(document.querySelectorAll('.edit-form'));
 
+   // console.log(allEditForms);
+
+    allEditForms.forEach (f=>f.classList.remove('active'));
+    editForm.classList.toggle('active');
+
+ }
 
 
   public deleteNews(e: Event): void {
@@ -75,9 +85,9 @@ export class NewsListComponent {
 
 
       var db_id= e.target[0].value; //
-      console.log(this.headline);
-      console.log(this.content);
-      console.log(db_id);
+     // console.log(this.headline);
+     // console.log(this.content);
+     // console.log(db_id);
 
 
               this.newsService.update(this.headline, this.content, db_id).subscribe(

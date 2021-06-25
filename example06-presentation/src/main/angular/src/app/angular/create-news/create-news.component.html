@@ -1,4 +1,4 @@
-<div class="card">
+<div class="border rounded shadow post-bg">
   <div class="card-body">
 
     <div class="alert alert-danger alert-dismissible" *ngIf="errorMessage != null">
@@ -16,7 +16,7 @@
         <label class="form-label">Content <span [ngClass]="getCharsLeft() < 0 ? 'text-danger' : 'text-muted'">({{getCharsLeft()}})</span></label>
         <textarea placeholder = "Enter your msg here..." name="content" class="form-control" required [(ngModel)]="content"></textarea>
       </div>
-      <button class="btn btn-block btn-outline-primary" [disabled]="getCharsLeft() < 0 || f.invalid">Create News</button>
+      <button class="btn btn-block btn-outline-light" [disabled]="getCharsLeft() < 0 || f.invalid">Create News</button>
 
     </form>
 

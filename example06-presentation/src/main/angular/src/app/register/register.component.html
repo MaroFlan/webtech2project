@@ -1,10 +1,10 @@
 <div class="container">
 
   <div class="mt-5 pt-5 text-center">
-    <h2>Sign in to PlatzhalterProjekt</h2>
+    <h2>Sign in to Carrier of Hope</h2>
   </div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-      <div class="rounded-lg shadow-lg p-5 mt-5 mx-auto py-4" style="width: 600px; min-height: 400px; background-color: #EEE">
+      <div class="rounded-lg shadow-lg p-5 mt-5 mx-auto py-4 post-bg rounded border" style="width: 600px; min-height: 400px; ">
 
         <label for="firstName" class="d-block">Name</label>
         <div class="mb-4 d-flex">
@@ -18,23 +18,23 @@
         </div>
 
         <label for="username" class="d-block">Username</label>
-        <small id="usersmall" class = "form-text text-muted" >Other users will see this.</small>
+        <small id="usersmall" class = "form-text text-white" >Other users will see this.</small>
         <input id="username" class="form-control mb-4" type="text" placeholder="Username (at least 6 characters)" name="username" ngModel required #uName="ngModel" minlength="6" maxlength="24">
 
         <label for="Email" class="d-block">E-Mail</label>
-        <small id="emailsmall" class = "form-text text-muted" >We'll never share your email with anyone else. In fact, we don't even verify it.</small>
+        <small id="emailsmall" class = "form-text text-white" >We'll never share your email with anyone else. In fact, we don't even verify it.</small>
         <input id="Email" class="form-control mb-4" type="email" placeholder="E-Mail" name="email" ngModel required #email="ngModel">
 
 
         <div class="mb-4">
           <label for="password" class="d-block">Password</label>
-          <small id="password-small" class = "form-text text-muted" >Your password is safe with us. It will be hashed. (We promise, probably)</small>
+          <small id="password-small" class = "form-text text-white" >Your password is safe with us. It will be hashed. (We promise, probably)</small>
           <input id="password" class="form-control mb-2" type="password" placeholder="Enter Password" name="password" ngModel required #pWord="ngModel" minlength="8" maxlength="24">
           <input id="repeatPassword" class="form-control mb-2" type="password" placeholder="Repeat Password" name="password2" ngModel required #pWord2="ngModel" minlength="8" maxlength="24">
         </div>
 
         <input id="regBtn" type="submit" routerLink="/auth" routerLinkActive="active" value="Register and continue to Login" [disabled] = "f.invalid"
-        class="btn btn-outline-primary mt-2 form-control form-control-lg" (click)="register(uName.value, pWord.value, pWord2.value, email.value, fName.value, lName.value)">
+        class="btn btn-outline-light mt-2 form-control form-control-lg" (click)="register(uName.value, pWord.value, pWord2.value, email.value, fName.value, lName.value)">
 
       </div>
   </form>
