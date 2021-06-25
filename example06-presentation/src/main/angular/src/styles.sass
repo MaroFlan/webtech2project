@@ -11,8 +11,8 @@ html
   font-size: 1rem
 
 body
-  padding-bottom: 2rem /* ./assets vllt stattdessen wenn er es nicht findet*/
-  background-image: url('assets/background.gif')
+  padding-bottom: 2rem /* Bug der IDE (?): asset wird nicht gefunden. './assets' zu '/assets' ändern (oder andersrum), wenn dieser Fehler geworfen wird  */
+  background-image: url('./assets/background.gif')
   background-repeat: no-repeat
   background-position: center
   background-attachment: fixed

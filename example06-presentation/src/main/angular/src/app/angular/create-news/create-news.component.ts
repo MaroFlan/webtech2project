@@ -9,7 +9,8 @@ import { User } from '../../user';
 @Component({
   selector: 'wt2-create-news',
   templateUrl: './create-news.component.html',
-  styleUrls: ['./create-news.component.sass']
+  styleUrls: ['./create-news.component.sass'],
+  providers: [NewsService]
 })
 export class CreateNewsComponent {
 
@@ -31,7 +32,7 @@ export class CreateNewsComponent {
     e.preventDefault();
     this.errorMessage = null;
 
-
+    // SecurityUtils.getSubject().checkRole("admin");//damit user abfragen?
     //if(this.currentUser){  //this.currentUser = dem aktuellen user irgendwie
 
         if (this.headline.trim() != null && this.content.trim() != null) {

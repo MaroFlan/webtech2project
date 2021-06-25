@@ -36,12 +36,12 @@ export class NewsListComponent {
 
 
   clickEvent(){
-    this.msg='Die Ehre gebührt Chris';
+    this.msg='The Carrier of Hope stays trusting in the Gods of Hope';
     return this.msg;
   }
 
   clickEvent2(){
-      this.msg='Der Hoffnungsträger dient allgegenwertig unter Chris';
+      this.msg='The Gods of Hope may help those faithful individuals who are in desperate need of it';
       return this.msg;
     }
 
@@ -99,7 +99,7 @@ export class NewsListComponent {
                       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                           this.router.navigate([currentUrl]);
                       });*/
-                  this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss
+                  this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss //currentUrl
                 //  this.router.navigate([this.router.url])
 
 

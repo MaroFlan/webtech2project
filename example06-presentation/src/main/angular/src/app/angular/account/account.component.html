@@ -1,0 +1,50 @@
+<!--<ng-template [ngIf]="user != null">
+  <form method="GET" action="/account">-->
+    <div class="container">
+
+      <!-- rufe am anfang methode auf welche alle infos des users ausliest.
+      Dabei gilt: man kann auf seinen eigenen Acc gehen oder auf fremden über seine gepostete Nachricht -->
+
+    <!--<div class="mt-5 pt-5 text-center shadow-lg p-5 mx-auto py-4 rounded-lg border">-->
+        <h2>Profile of {{user.username}}</h2>
+      <!-- </div>-->
+
+      <div class="mx-auto" style="height: 75px; width: 75px;">
+        <svg width="75px" height="75px" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+          <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+        </svg>
+      </div>
+
+      <div class="rounded-lg shadow-lg p-5 mt-5 mx-auto py-4 post-bg" style="width: 600px; min-height: 300px; background-color: #EEE">
+        <a class="d-block font-weight-bold">First Name</a>
+        <a class="d-block mb-2">{{user.firstname}}</a>
+
+        <a class="d-block font-weight-bold">Last Name</a>
+        <a class="d-block mb-2">{{user.lastname}}</a>
+
+        <a class="d-block font-weight-bold">E-Mail</a>
+        <a class="d-block mb-2">{{user.email}}</a>
+
+        <a class="d-block font-weight-bold">Posts from {{user.username}}</a>
+        <!-- list all the messages the user has posted -->
+
+      </div>
+    </div>
+ <!-- </form>
+</ng-template>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+

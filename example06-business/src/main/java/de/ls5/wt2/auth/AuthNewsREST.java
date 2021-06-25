@@ -81,7 +81,7 @@ public class AuthNewsREST {
                  produces = MediaType.APPLICATION_JSON_VALUE)
     public DBNews create(@RequestBody final DBNews param) {
 
-        SecurityUtils.getSubject().checkRole("admin");
+        SecurityUtils.getSubject().checkRole("admin");//damit user abfragen?
 
         final DBNews news = new DBNews();
 
