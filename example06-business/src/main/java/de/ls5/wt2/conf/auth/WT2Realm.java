@@ -5,11 +5,12 @@ import java.util.Collections;
 
 import javax.persistence.EntityManager;
 
+import de.ls5.wt2.UserRepository;
+//import de.ls5.wt2.conf.auth.permission.ReadNewsItemPermission;
 import de.ls5.wt2.conf.auth.permission.ReadNewsItemPermission;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAccount;
+import de.ls5.wt2.entity.User;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -24,11 +25,51 @@ public class WT2Realm extends AuthorizingRealm implements Realm {
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordService passwordService;
+
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        final String user = (String) token.getPrincipal();
-        return new SimpleAccount(user, user.toCharArray(), WT2Realm.REALM);
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
+        if(!(token instanceof UsernamePasswordToken)) throw new IllegalStateException("Please only use UsernamePasswordToken for authentication");
+
+        final UsernamePasswordToken userPassToken = (UsernamePasswordToken) token;
+
+        User myUser = userRepository.findByUsername(userPassToken.getUsername());
+        if(myUser == null) return null;
+
+        String pwHash = passwordService.encryptPassword(userPassToken.getPassword());
+        System.out.println("Comparing given: " + pwHash + " to " + myUser.getPassword());
+        if(pwHash.equals(myUser.getPassword())) {
+            return new SimpleAccount(token.getPrincipal(), token.getCredentials(), WT2Realm.REALM);
+        }
+
+        throw new IllegalStateException("Login Failed, password didn't match");
     }
+    /*
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        //final String user = (String) token.getPrincipal();
+        User user = userRepository.findByUsername((String) token.getPrincipal());
+
+        final Object username = token.getPrincipal();
+        final Object pw = token.getCredentials();
+        System.out.println("## "+ username + " " + pw);
+        if(!user.getPassword().equals(pw)){
+
+
+            throw new AuthenticationException();
+        }
+        //in db anschauen
+        return new SimpleAccount(token.getPrincipal(), token.getCredentials(), WT2Realm.REALM);
+       // return new SimpleAccount(user.getUsername(), user.getPassword(), WT2Realm.REALM);//dbUser.getpw
+    }*/
+
+
+
+
+
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

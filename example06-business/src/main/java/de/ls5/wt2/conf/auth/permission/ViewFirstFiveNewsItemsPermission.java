@@ -19,6 +19,6 @@ public class ViewFirstFiveNewsItemsPermission implements Permission {
     }
 
     public boolean check() {
-        return this.news.size() < 5;
-    }
+        return this.news.size() < 5000;
+    }//-----------
 }

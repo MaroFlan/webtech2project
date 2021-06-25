@@ -118,7 +118,7 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
 
     }
-
+*/
     /////////////////////////////////////////////////////////////////////////////////
     //passwort hash
     /////////////////////////////////////////////////////////////////////////////////
@@ -127,14 +127,14 @@ public class ShiroConfig {
         DefaultPasswordService defaultPasswordService = new DefaultPasswordService();
         DefaultHashService hashService = new DefaultHashService();
         hashService.setHashAlgorithmName("SHA-512");
-        hashService.setGeneratePublicSalt(false);
-        hashService.setHashIterations(1024);
+       // hashService.setGeneratePublicSalt(false); //vllt noch salten mit einbauen? ---Bedingung: muss fehlerfrei funktionieren
+        hashService.setHashIterations(1024); //increase hash iterations damit ein Attacker länger zum computen braucht
 
         defaultPasswordService.setHashService(hashService);
         return defaultPasswordService;
 
     }
 
-*/
+
 
 }

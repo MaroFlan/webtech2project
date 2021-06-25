@@ -3,34 +3,46 @@
 </div>
 
 <div class="list-group" *ngIf="news.length > 0">
-  <div class="list-group-item d-flex flex-row" *ngFor="let n of reversedNews; let i = index" [class.list-group-item-primary]="i == 0">
+  <div class="my-4 p-4 rounded border shadow d-flex flex-row" *ngFor="let n of reversedNews; let i = index" [class.list-group-item-primary]="i == 0">
+
     <div class="w-100 mr-2">
-      <h5 class="mb-0">{{n.headline}} <!--{{n.id}}--> <span class="badge badge-warning" *ngIf="i == 0">Latest News</span></h5>
+     <div> <small>{{n.publishedOn | date:mediumDate}}</small> <span class="badge badge-warning" *ngIf="i == 0">Latest News</span> </div>
+      <h5 class="mb-0">{{n.headline}} <!--{{n.id}}--> </h5>
       <h6 class="mb-0"> {{n.content}}</h6>
     </div>
     <div>
 
-      <form #f="ngForm" (submit)="updateNews($event)">
+      <button class="d-none">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+      </button>
+      <form #f="ngForm" class="edit-form active" (submit)="updateNews($event)">
         <input type="hidden" name="id" value="{{n.id}}"/>
 
-        <!--Wie dem edit die neuen infos gut übergeben?-->
+        <!--Wie dem edit die neuen infos gut übergeben?--><!--irgendwie über neue component regeln-->
         <!--nicht die schönste Lösung aber immerhin RESTful. Popup dialoge haben nicht funktioniert. Redirect auf andere Seite wäre unschön-->
         <input placeholder = "Update title" name="headline" class="form-control" type="text" required [(ngModel)]="headline" >
         <input placeholder ="Update msg" name="content" class="form-control" type="text" required [(ngModel)]="content">
         <!--Problem: input text wird in allen update msg blöcken angezeigt.-->
 
-        <button class="btn btn-block btn-outline-secondary" [disabled]="getCharsLeft() < 0 || f.invalid">edit msg</button>
+        <button class="btn btn-block btn-outline-secondary" [disabled]="getCharsLeft() < 0 || f.invalid">
+
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+
+        </button>
       </form>
 
 
     </div>
     <div class="flex-shrink-0">
 
-      <small>{{n.publishedOn | date:mediumDate}}</small>
 
-      <form (submit)="deleteNews($event)">
+
+      <form (submit)="deleteNews($event)" (deleted)="load()">
         <input type="hidden" name="id" value="{{n.id}}"/>
-        <button class="btn btn-block btn-outline-danger" >delete msg</button>
+        <button class="btn" >
+
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="red"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/></svg>
+        </button>
       </form>
 
 
@@ -44,12 +56,12 @@
 
 
 
-<button (click)="clickEvent()" class="btn btn-block btn-outline-danger" >Button der Hoffnung </button>
+<button (click)="clickEvent()" class="btn btn-block btn-outline-success" >Button der Hoffnung </button>
 <p>
   {{msg}}
 </p>
 
-<button (click)="clickEvent2()" class="btn btn-block btn-outline-danger" >Button der zweiten Hoffnung </button>
+<button (click)="clickEvent2()" class="btn btn-block btn-outline-success" >Button der zweiten Hoffnung </button>
 <p>
 
 </p>

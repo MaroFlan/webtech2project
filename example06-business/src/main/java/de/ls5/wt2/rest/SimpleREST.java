@@ -2,11 +2,13 @@ package de.ls5.wt2.rest;
 
 import de.ls5.wt2.UserRepository;
 import de.ls5.wt2.entity.User;
+import org.apache.shiro.authc.credential.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.persistence.EntityManager;
 
@@ -25,6 +27,9 @@ public class SimpleREST {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordService passwordService;
+
     @GetMapping(produces =  MediaType.APPLICATION_JSON_VALUE)
     public String[] get(){
         return new String[] {"value1", "value2"};
@@ -42,7 +47,9 @@ public class SimpleREST {
         user.setLastname(param.getLastname());
         user.setEmail(param.getEmail());
         user.setUsername(param.getUsername());
-        user.setPassword(param.getPassword());
+
+
+        user.setPassword(passwordService.encryptPassword(param.getPassword())); //sickes hashing
 
         userRepository.save(user);
 

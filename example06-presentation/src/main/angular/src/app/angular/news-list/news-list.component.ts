@@ -21,6 +21,7 @@ export class NewsListComponent {
   public deleted = new EventEmitter();
   public updated = new EventEmitter();
 
+
   public headline: string = "";
   public content: string = "";
 
@@ -56,12 +57,15 @@ export class NewsListComponent {
         this.newsService.delete(db_id).subscribe(
           () => {
             this.deleted.emit();
+
+
             //window.location.reload(); //virgin page refresh
             this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
           },
           () => console.log("Error while deleting")
         );
       }
+
 
 
 

@@ -4,7 +4,7 @@ import org.apache.shiro.authz.Permission;
 
 public class ReadNewsItemPermission implements Permission {
 
-    @Override
+   @Override
     public boolean implies(Permission p) {
 
         if (p instanceof ViewFirstFiveNewsItemsPermission) {
