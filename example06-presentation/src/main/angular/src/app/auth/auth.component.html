@@ -7,12 +7,12 @@
         <li class="nav-item">
           <a class="nav-link" href="#" (click)="useBasicAuth($event)" [class.active]="isBasicAuth()">Basic</a>
         </li>
-        <li class="nav-item">
+       <!-- <li class="nav-item">
           <a class="nav-link" href="#" (click)="useSessionAuth($event)" [class.active]="isSessionAuth()">Session</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" (click)="useJwtAuth($event)" [class.active]="isJwtAuth()">JWT</a>
-        </li>
+        </li>--> <!-- auskommentiert weil wir diese optionen wahrscheinlich nicht benutzen-->
       </ul>
       <hr>
       <wt2-login [authService]="authService" (loggedIn)="load()"></wt2-login>
@@ -54,3 +54,6 @@
   </div>
 
 </div>
+
+<h5>Carrier of Hope is a community of individuals who are committed to bring hope into the life of others. This hope
+shall be directed to those in need of it. Therefore, our plattform requires the users to be signed it. </h5>
