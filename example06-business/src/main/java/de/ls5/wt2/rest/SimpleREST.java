@@ -56,7 +56,7 @@ public class SimpleREST {
         return user;
     }
 
-    //-----------get a User-------------
+    //-----------get a User by id-------------
     @GetMapping(path = "{id}",
             // consumes = MediaType.TEXT_PLAIN_VALUE, //
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -64,6 +64,16 @@ public class SimpleREST {
 
         //System.out.print("it works");
         return this.userRepository.findById(id);
+    }
+
+    //-----------get a User by name-------------
+    @GetMapping(path = "{name}",
+            // consumes = MediaType.TEXT_PLAIN_VALUE, //
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getUser(@PathVariable("name") final String name) {
+
+        //System.out.print("it works");
+        return this.userRepository.findByUsername(name);
     }
 
     //-----------delete User-------------
@@ -77,12 +87,12 @@ public class SimpleREST {
     }
 
     //-----------edit User-info-------------
-    @PutMapping(path = "/{id}",
+    @PutMapping(path = "/{name}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public User edit( @RequestBody final User param, @PathVariable(value="id") long id) { //pathvar und requestbody
+    public User edit( @RequestBody final User param, @PathVariable("name") final String name) { //pathvar und requestbody
 
-        User user = userRepository.findById(id);
+        User user = userRepository.findByUsername(name);
 
         user.setFirstname(param.getFirstname());
         user.setLastname(param.getLastname());

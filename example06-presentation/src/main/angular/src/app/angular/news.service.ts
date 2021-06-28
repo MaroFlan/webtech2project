@@ -51,4 +51,22 @@ export class NewsService extends BaseNewsService {
           return this.http.post(`http://localhost:4200/rest/simple`, user); //vllt link vereinheitlichen
 
         }
+
+
+    /*
+      getUser(username: string): Observable<User>{
+
+        return this.http.get('http://localhost:4200/rest/simple/' + username)
+          .map((data: {user: User}) => data.user;
+      }
+    */
+
+    /*
+        edit(user: User, username: string): Observable<any>{ //user besitzt neue infos, username ist der (womöglich alte) username
+                  return this.http.put(`http://localhost:4200/rest/simple/` + username, user); //vllt link vereinheitlichen
+
+                }
+    */
+
+
 }
