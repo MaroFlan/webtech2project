@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NewsService } from './news.service';
 import { News } from '../news';
+import { AuthService } from '../auth/auth.service';
+
 
 @Component({
   selector: 'wt2-angular',
@@ -9,6 +11,8 @@ import { News } from '../news';
   providers: [NewsService]
 })
 export class AngularComponent implements OnInit {
+
+  authService: AuthService;
 
   public latest: News;
   public news: News[] = [];
@@ -30,5 +34,7 @@ export class AngularComponent implements OnInit {
       console.error
     );
   }
+
+
 
 }

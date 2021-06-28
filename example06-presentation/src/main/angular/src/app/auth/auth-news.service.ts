@@ -67,18 +67,5 @@ export class AuthNewsService extends BaseNewsService {
           }
 
 
-  /*
-    login(model: any) { //link anpassen
-      return this.http.post(`${this._authService.getBaseUrl()}/`).pipe(
-        map((response: any) => {
-          const user = response;
-          //hier könnte man token implementieren
-        })
-      )
-    }*/
-    /*
-    register(user: User): Observable<any>{
-        return this.http.post(this.accountUrl, user);
 
-      }*/
 }
