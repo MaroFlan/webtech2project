@@ -23,11 +23,11 @@ export class RegisterComponent implements OnInit {
   register(uName: string, pWord1: string, pWord2: string, email: string, fName: string, lName: string ): void {
         if (pWord1 === pWord2){
 
-        console.log(uName)
-        console.log(pWord1)
-        console.log(email)
-        console.log(fName)
-        console.log(lName)
+        //console.log(uName)
+        //console.log(pWord1)
+        //console.log(email)
+        //console.log(fName)
+        //console.log(lName)
 
           // lege User an
          // weise eingegebene account daten zu
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
           this.newsService.register(user).subscribe(response => {
             this.registerResponse = response;
             if (response){
-              this.router.navigate(['/auth']); //nav funktioniert noch nicht
+              this.router.navigate(['/auth']);
             }else {
               alert(response);
             }
@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
         else
         {
           alert("Passwords did not match");
+          this.router.navigate(['/register']); //user bleibt auf register page um seine pw nochmal zu überprüfen
           return;
         }
 

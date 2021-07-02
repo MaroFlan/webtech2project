@@ -49,8 +49,6 @@ export class NewsListComponent {
     var editForm = document.getElementById('edit-form-' + id);
     var allEditForms = Array.from(document.querySelectorAll('.edit-form'));
 
-   // console.log(allEditForms);
-
     allEditForms.forEach (f=>f.classList.remove('active'));
     editForm.classList.toggle('active');
 
