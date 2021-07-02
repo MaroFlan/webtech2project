@@ -81,44 +81,7 @@ public class ShiroConfig {
     }
 
 
-    //----------------take this--------------------------
-  /*  @Bean
-    public Realm realm2() {
-        H2AuthorizingRealm h2AuthorizingRealm = new H2AuthorizingRealm();
-        PasswordMatcher passwordMatcher = new PasswordMatcher();
-        passwordMatcher.setPasswordService(passwordService());
-        h2AuthorizingRealm.setCredentialsMatcher(passwordMatcher);
-        return h2AuthorizingRealm;
-    }
 
-
-    @Bean
-    public WebSecurityManager securityManager(Realm realm) {
-        return new DefaultWebSecurityManager(realm);
-    }
-
-    @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(WebSecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-
-        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
-
-        filters.put("loginFilter", new FormAuthenticationFilterWithoutRedirect());
-        filters.put("logoutFilter", new LogoutFilterWithoutRedirect());
-
-        final Map<String, String> chainDefinition = new LinkedHashMap<>();
-
-        // configuration for using session based authentication
-        chainDefinition.put("/login.jsp", "loginFilter");
-        chainDefinition.put("/logout", "logoutFilter");
-
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(chainDefinition);
-
-        return shiroFilterFactoryBean;
-
-    }
-*/
     /////////////////////////////////////////////////////////////////////////////////
     //passwort hash
     /////////////////////////////////////////////////////////////////////////////////

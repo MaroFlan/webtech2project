@@ -62,20 +62,6 @@ export class RegisterComponent implements OnInit {
         }
 
 
-    /* ----referenz
-    public updateNews(e: Event): void {
-
-
-                  this.newsService.update(this.headline, this.content, db_id).subscribe(
-                    () => {
-                      this.updated.emit();
-                     // this.headline = "";
-                   //   this.content = "";
-                      this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
-                    },
-                    () => console.log("Error while updating")
-                  );
-        }*/
   }
 }
 
