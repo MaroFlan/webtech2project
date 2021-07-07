@@ -64,11 +64,13 @@ export class NewsListComponent {
 
         this.newsService.delete(db_id).subscribe(
           () => {
-            this.deleted.emit();
-
-
-            //window.location.reload(); //virgin page refresh
-            this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
+            this.deleted.emit(); // wird in auth.component.html aufgefangen
+            /*--------------------OUTDATED--------------------*/
+            // let currentUrl = this.router.url;
+            // console.log(currentUrl);
+            // //window.location.reload(); //virgin page refresh
+            // this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // chad fucking redirect (kill me now)
+            /*--------------------OUTDATED--------------------*/
           },
           () => console.log("Error while deleting")
         );
@@ -88,23 +90,25 @@ export class NewsListComponent {
      // console.log(db_id);
 
 
-              this.newsService.update(this.headline, this.content, db_id).subscribe(
-                () => {
-                  this.updated.emit();
+      this.newsService.update(this.headline, this.content, db_id).subscribe(
+        () => {
+          this.updated.emit();  //y u no work? https://bit.ly/3xuptX6
+          this.headline = "";
+          this.content = "";
+          /*--------------------OUTDATED--------------------*/
+        //  let currentUrl = this.router.url;
+        //   console.log(currentUrl);
+        //       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        //           this.router.navigate([currentUrl]);
+        //       });
+          //this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss //currentUrl
+        //  this.router.navigate([this.router.url])
+          /*--------------------OUTDATED--------------------*/
 
-                 let currentUrl = this.router.url;
-                  console.log(currentUrl);/*
-                      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                          this.router.navigate([currentUrl]);
-                      });*/
-                  this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss //currentUrl
-                //  this.router.navigate([this.router.url])
 
-
-
-                },
-                () => console.log("Error while updating")
-              );
+        },
+        () => console.log("Error while updating")
+      );
     }
 
     getCharsLeft(): number {
