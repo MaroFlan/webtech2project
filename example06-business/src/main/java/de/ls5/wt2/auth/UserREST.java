@@ -43,10 +43,10 @@ public class UserREST {
 
         final Subject subject = SecurityUtils.getSubject();
 
-        /*
-        if (!subject.isAuthenticated()) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }*/
+
+       // if (!subject.isAuthenticated()) {
+       //     return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+       // }
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);//ResponseEntity.ok(subject.getPrincipal().toString());
     }

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { SessionAuthService } from '../../auth/session-auth.service';
 import { AuthComponent } from '../../auth/auth.component';
 import { User } from '../../user';
+//import { BasicAuthService } from '../../auth/basic-auth.service';
 
 @Component({
   selector: 'wt2-create-news',
@@ -26,7 +27,8 @@ export class CreateNewsComponent {
   public errorMessage: string;
   public userId: number;
 
-  constructor(private newsService: NewsService) { }
+  constructor(private newsService: NewsService, //private basicAuthService: BasicAuthService
+  ) { }
 
   public createNews(e: Event): void {
     e.preventDefault();

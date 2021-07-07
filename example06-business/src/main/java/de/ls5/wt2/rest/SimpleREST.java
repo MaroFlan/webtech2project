@@ -57,24 +57,24 @@ public class SimpleREST {
     }
 
     //-----------get a User by id-------------
-    @GetMapping(path = "{id}",
+    @GetMapping(path = "/{id}",
             // consumes = MediaType.TEXT_PLAIN_VALUE, //
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUser(@PathVariable("id") final long id) {
+    public User getUserById(@PathVariable("id") final long id) {
 
         //System.out.print("it works");
         return this.userRepository.findById(id);
     }
 
     //-----------get a User by name-------------
-    @GetMapping(path = "{name}",
+   /* @GetMapping(path = "{name}",
             // consumes = MediaType.TEXT_PLAIN_VALUE, //
             produces = MediaType.APPLICATION_JSON_VALUE)
     public User getUser(@PathVariable("name") final String name) {
 
         //System.out.print("it works");
         return this.userRepository.findByUsername(name);
-    }
+    }*/
 
     //-----------delete User-------------
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

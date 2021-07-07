@@ -1,0 +1,33 @@
+<div class="alert alert-info" *ngIf="news.length == 0">
+  No news available
+</div>
+
+
+<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+
+<div class="list-group" *ngIf="news.length > 0">
+  <div class="my-4 p-4 rounded border shadow d-flex flex-row post-bg" *ngFor="let n of reversedNews; let i = index" [class.list-group-item-primary]="i == 0">
+
+    <div class="w-100 mr-2">
+      <div> <small>{{n.publishedOn | date:mediumDate}}</small> <span class="badge badge-warning" *ngIf="i == 0">Latest Message of Hope</span> </div>
+      <h5 class="mb-0">{{n.headline}} <!--{{n.id}}--> </h5>
+      <h6 class="mb-0"> {{n.content}}</h6>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+<button (click)="clickEvent()" class="btn btn-block btn-outline-success" >Button of Hope </button>
+<p>
+  {{msg}}
+</p>
+
+<button (click)="clickEvent2()" class="btn btn-block btn-outline-success" >Button of desperate hope </button>
+<p>
+
+</p>

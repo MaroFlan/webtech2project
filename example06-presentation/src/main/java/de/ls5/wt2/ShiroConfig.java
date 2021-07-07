@@ -6,9 +6,9 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 
-import de.ls5.wt2.conf.auth.BasicAuthenticationFilterWithoutRedirect;
-import de.ls5.wt2.conf.auth.FormAuthenticationFilterWithoutRedirect;
-import de.ls5.wt2.conf.auth.LogoutFilterWithoutRedirect;
+import de.ls5.wt2.auth.BasicAuthenticationFilterWithoutRedirect;
+import de.ls5.wt2.auth.FormAuthenticationFilterWithoutRedirect;
+import de.ls5.wt2.auth.LogoutFilterWithoutRedirect;
 import de.ls5.wt2.conf.auth.WT2Realm;
 import de.ls5.wt2.conf.auth.jwt.JWTAuthenticationFilter;
 import de.ls5.wt2.conf.auth.jwt.JWTWT2Realm;

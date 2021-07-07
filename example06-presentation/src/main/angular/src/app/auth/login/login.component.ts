@@ -29,7 +29,7 @@ export class LoginComponent {
       this.authService.login(this.username, this.password).subscribe(
 
         () => {this.loggedIn.emit();
-        this.router.navigate(['/']).then(() => { this.router.navigate(['/angular']); }) //bei succesful login wird auf msg page weitergeleitet
+        this.router.navigate(['/']).then(() => { this.router.navigate(['/auth']); }) //bei succesful login wird auf msg page weitergeleitet
         },
         () => this.errorMessage = "Failed to login"
       );

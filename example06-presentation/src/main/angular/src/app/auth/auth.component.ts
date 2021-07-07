@@ -36,6 +36,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
     if (e != null) e.preventDefault();
     this.authService = new BasicAuthService(this.http);
     this.authNewsService.authService = this.authService;
+    console.log('basicAuth was used ' + this.authService + ' ||| ' + this.authNewsService)
   }
 
   useJwtAuth(e?: Event) {

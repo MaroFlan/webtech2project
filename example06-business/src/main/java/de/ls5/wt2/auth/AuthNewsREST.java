@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Transactional
 @RestController
-@RequestMapping(path = {"rest/auth/session/news", "rest/auth/basic/news", "rest/auth/jwt/news"})
+@RequestMapping(path = {"rest/auth/session/news", "rest/auth/basic/news", "rest/auth/jwt/news", "/angular"})
 public class AuthNewsREST {
 
     @Autowired
@@ -51,6 +51,7 @@ public class AuthNewsREST {
         // Attribute based permission check using permissions
         final Subject subject = SecurityUtils.getSubject();
         final Permission firstFiveNewsItemsPermission = new ViewFirstFiveNewsItemsPermission(result);
+        System.out.println("this is the subject " + subject);
 
         if (!subject.isPermitted(firstFiveNewsItemsPermission)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -62,6 +63,7 @@ public class AuthNewsREST {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DBNews>> readAllAsJSON() {
         final Subject subject = SecurityUtils.getSubject();
+        System.out.println("this is the subject " + subject);
         if (subject == null || !subject.isAuthenticated()) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
