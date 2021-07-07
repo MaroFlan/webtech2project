@@ -18,9 +18,8 @@ export class NewsListComponent {
 
  constructor(private newsService: NewsService, private router: Router) { }
 
-  @Output()
-  public deleted = new EventEmitter();
-  public updated = new EventEmitter();
+  @Output() public deleted = new EventEmitter();
+  @Output() public updated = new EventEmitter();
 
 
   public headline: string = "";
