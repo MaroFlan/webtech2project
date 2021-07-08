@@ -104,30 +104,6 @@ public class NewsREST {
         return news;
     }
 
-    //spring rest basic auth
-    //oder spring rest session
-    //rest soll auth abfrage machen
 
 
-
-
-
-
-
-    // An example of how to misuse the API and do something unRESTful
-    @GetMapping(path = "new/{headline}/{content}",
-                consumes = MediaType.TEXT_PLAIN_VALUE,
-                produces = MediaType.APPLICATION_JSON_VALUE)
-    public DBNews create(@PathVariable("headline") final String headline,
-                         @PathVariable("content") final String content) {
-        final DBNews news = new DBNews();
-
-        news.setHeadline(headline);
-        news.setContent(content);
-        news.setPublishedOn(new Date());
-
-        this.entityManager.persist(news);
-
-        return news;
-    }
 }

@@ -16,7 +16,4 @@ export class CreateNewsAuthComponent extends CreateNewsComponent {
     super(newsService, basicAuthService);//, authService);
   }
 
-  //public what(): HttpHeaders{
-  //return this.newsService.getAuthHeaders()
-  //}
 }

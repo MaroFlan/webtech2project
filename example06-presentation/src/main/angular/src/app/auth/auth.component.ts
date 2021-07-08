@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthNewsService } from './auth-news.service';
 import { AngularComponent } from '../angular/angular.component';
-import { JwtAuthService } from './jwt-auth.service';
 import { BasicAuthService } from './basic-auth.service';
 import { AuthService } from './auth.service';
 import { SessionAuthService } from './session-auth.service';
@@ -39,11 +38,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
     console.log('basicAuth was used ' + this.authService + ' ||| ' + this.authNewsService)
   }
 
-  useJwtAuth(e?: Event) {
-    if (e != null) e.preventDefault();
-    this.authService = new JwtAuthService(this.http);
-    this.authNewsService.authService = this.authService;
-  }
+
 
   useSessionAuth(e?: Event) {
     if (e != null) e.preventDefault();
@@ -55,9 +50,6 @@ export class AuthComponent extends AngularComponent implements OnInit {
     return this.authService instanceof BasicAuthService;
   }
 
-  isJwtAuth(): boolean {
-    return this.authService instanceof JwtAuthService;
-  }
 
   isSessionAuth(): boolean {
     return this.authService instanceof SessionAuthService;

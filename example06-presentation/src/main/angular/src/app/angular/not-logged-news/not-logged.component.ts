@@ -93,13 +93,8 @@ export class NotloggedComponent {
                   this.updated.emit();
 
                  let currentUrl = this.router.url;
-                  console.log(currentUrl);/*
-                      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                          this.router.navigate([currentUrl]);
-                      });*/
+                  console.log(currentUrl);
                   this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss //currentUrl
-                //  this.router.navigate([this.router.url])
-
 
 
                 },

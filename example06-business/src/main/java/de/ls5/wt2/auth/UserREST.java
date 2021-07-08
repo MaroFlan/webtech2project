@@ -26,13 +26,7 @@ import javax.validation.Valid;
 @RestController //"rest/auth/session/profile", "rest/auth/basic/profile", "rest/auth/jwt/profile",
 @RequestMapping(path = {"rest/auth/session/profile", "rest/auth/basic/profile", "rest/auth/jwt/profile"})
 public class UserREST {
-    /*
-    @Autowired
-    private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordService passwordService;
-    */
     @Autowired
     private UserRepository userRepository;
 
@@ -50,15 +44,5 @@ public class UserREST {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);//ResponseEntity.ok(subject.getPrincipal().toString());
     }
 
-
-/*
-    @GetMapping(path = "{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUser(@PathVariable("id") final long id) {
-
-        //System.out.print("it works");
-        User user = userRepository.findById(id);
-
-    }*/
 
 }

@@ -74,10 +74,10 @@ export class NewsListComponent {
      //console.log(e.target[1].value);
      //console.log(e.target[2].value);
 
-     //get the username of message here
 
+     //not currently implemented: get the username of message here similar to db_id
     this.messageUsername = "";
-    this.currentUsername="AdminOfAdmins";
+    this.currentUsername="AdminOfAdmins"; //set your username manually here to test the authorization
 
           if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
 
@@ -117,7 +117,7 @@ export class NewsListComponent {
      //get the username of message here
 
     this.messageUsername = "";
-    this.currentUsername="AdminOfAdmins";
+    this.currentUsername="AdminOfAdmins";   ////////////////////---------------Admin Funktion hier de-/aktivieren----------------
 
           if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
 
@@ -126,17 +126,6 @@ export class NewsListComponent {
                   this.updated.emit();
                   this.headline = "";
                   this.content = "";
-
-          /*----------------------OUTDATED----------------------
-                 let currentUrl = this.router.url;
-                  console.log(currentUrl);
-                      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                          this.router.navigate([currentUrl]);
-                      });
-                  this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss //currentUrl
-                //  this.router.navigate([this.router.url])
-                  */
-
 
 
                 },
@@ -150,6 +139,6 @@ export class NewsListComponent {
     }
 
     getCharsLeft(): number {
-        return 255 - this.content.length; //anpassbar, sodass auch headline länge überprüft wird
+        return 255 - this.content.length;
       }
 }

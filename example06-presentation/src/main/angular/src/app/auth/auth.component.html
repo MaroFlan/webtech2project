@@ -7,12 +7,7 @@
         <li class="nav-item">
           <a class="nav-link" href="#" (click)="useBasicAuth($event)" [class.active]="isBasicAuth()">Basic</a>
         </li>
-       <!-- <li class="nav-item">
-          <a class="nav-link" href="#" (click)="useSessionAuth($event)" [class.active]="isSessionAuth()">Session</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="useJwtAuth($event)" [class.active]="isJwtAuth()">JWT</a>
-        </li>--> <!-- auskommentiert weil wir diese optionen wahrscheinlich nicht benutzen-->
+
       </ul>
       <hr>
       <wt2-login [authService]="authService" (loggedIn)="load()"></wt2-login>
@@ -33,22 +28,14 @@
   <div class="row">
     <div>
 
-
-      <!--edit field?
-      <h4 class="title">Create News</h4>
-      <hr>
-      <wt2-create-news (created)="load()"></wt2-create-news> -->
     </div>
     <div class="container" style="padding: 0 8em">
-      <!-- <h4 class="title">Create News</h4>
-       <hr>-->
+
       <wt2-create-news (created)="load()"></wt2-create-news>
-      <!--<h4 class="title">Latest News</h4>
-      <hr>
-      <wt2-news-details [news]="latest"></wt2-news-details>-->
+
       <hr style="margin-top:2.5em">
-      <!-- <h4 class="title">All News</h4>
-       <hr>--><wt2-news-list [news]="news" (updated)="load()" (deleted)="load()" ></wt2-news-list>
+
+       <wt2-news-list [news]="news" (updated)="load()" (deleted)="load()" ></wt2-news-list>
     </div>
   </div>
 

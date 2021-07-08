@@ -48,23 +48,6 @@ public class WT2Realm extends AuthorizingRealm implements Realm {
 
         throw new IllegalStateException("Login Failed, password didn't match");
     }
-    /*
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        //final String user = (String) token.getPrincipal();
-        User user = userRepository.findByUsername((String) token.getPrincipal());
-
-        final Object username = token.getPrincipal();
-        final Object pw = token.getCredentials();
-        System.out.println("## "+ username + " " + pw);
-        if(!user.getPassword().equals(pw)){
-
-
-            throw new AuthenticationException();
-        }
-        //in db anschauen
-        return new SimpleAccount(token.getPrincipal(), token.getCredentials(), WT2Realm.REALM);
-       // return new SimpleAccount(user.getUsername(), user.getPassword(), WT2Realm.REALM);//dbUser.getpw
-    }*/
 
 
 
