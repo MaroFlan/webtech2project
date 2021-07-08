@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+/*import { Component } from '@angular/core';
 import { CreateNewsComponent } from '../../angular/create-news/create-news.component';
 import { SecurityNewsService } from '../security-news.service';
 
@@ -13,3 +13,4 @@ export class CreateNewsSecurityComponent extends CreateNewsComponent {
     super(newsService);
   }
 }
+*/

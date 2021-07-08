@@ -10,6 +10,7 @@ import {User} from '../user';
 @Injectable()
 export class NewsService extends BaseNewsService {
 
+
   constructor(http: HttpClient) {
     super(http);
   }
@@ -26,8 +27,8 @@ export class NewsService extends BaseNewsService {
     );
   }
 
-  create(headline: string, content: string): Observable<News> {
-    return this.http.post<any>(`${env.apiUrl}/news`, {headline, content}, {headers: this.defaultHeaders}).pipe(
+  create(headline: string, content: string, username: string): Observable<News> {
+    return this.http.post<any>(`${env.apiUrl}/news`, {headline, content, username}, {headers: this.defaultHeaders}).pipe(
       map(body => News.fromObject(body))
     );
   }
@@ -49,8 +50,8 @@ export class NewsService extends BaseNewsService {
 
       register(user: User): Observable<any>{
           return this.http.post(`http://localhost:4200/rest/simple`, user); //vllt link vereinheitlichen
-
         }
+
 
 
     /*

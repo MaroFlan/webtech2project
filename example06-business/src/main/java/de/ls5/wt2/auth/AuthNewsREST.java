@@ -9,9 +9,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 
+import de.ls5.wt2.UserRepository;
 import de.ls5.wt2.conf.auth.permission.ViewFirstFiveNewsItemsPermission;
 import de.ls5.wt2.entity.DBNews;
 import de.ls5.wt2.entity.DBNews_;
+import de.ls5.wt2.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.subject.Subject;
@@ -28,11 +30,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Transactional
 @RestController
-@RequestMapping(path = {"rest/auth/session/news", "rest/auth/basic/news", "rest/auth/jwt/news", "/angular"})
+@RequestMapping(path = {"rest/auth/session/news", "rest/auth/basic/news", "rest/auth/jwt/news", //"/angular"
+})
 public class AuthNewsREST {
 
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping(path = "newest",
                 produces = MediaType.APPLICATION_JSON_VALUE)
@@ -95,4 +101,51 @@ public class AuthNewsREST {
 
         return news;
     }
+
+    //////////////////////////current user handling
+
+    @PostMapping(value = "/current") //vllt path abfrage anders
+    public String saveUsername(final String username){
+        final User user = userRepository.findByUsername(username);
+        user.setCurrent(true);
+        userRepository.save(user);//habe einen eintrag in der datenbank wo current true ist
+
+
+        return username;
+    }
+
+    //put statt post eignet sich evtl besser. Es soll schließlich nur der current wert geändert werden
+    @PostMapping(value = "/current/inactive") //vllt path abfrage anders
+    public String UserNowInactive(final String username){
+        final User user = userRepository.findByUsername(username);
+        user.setCurrent(false);
+        userRepository.save(user);
+        //setze current false sobald user sich abmeldet
+
+        return username;
+    }
+
+    @GetMapping( value="/current")
+    public String getCurrentUser(){
+        int tryId=1; //id einträge starten bei 1 und werden anschließend inkrementiert
+        int currentUserId=-1;
+        String currentUsername= "";
+        while(true){
+            try{
+                User maybeUser = userRepository.findById(tryId);
+                if(maybeUser.getCurrent() == true){
+                    currentUsername = maybeUser.getUsername();
+                    break;
+                }
+                else{
+                    tryId++;
+                }
+            }
+            catch (Exception e) {
+                break;
+            }
+        }
+        return currentUsername;
+    }
+
 }

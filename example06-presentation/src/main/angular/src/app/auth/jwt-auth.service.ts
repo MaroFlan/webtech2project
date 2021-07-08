@@ -4,10 +4,15 @@ import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { environment as env } from '../../environments/environment';
+import { User } from '../user';
+
 
 @Injectable()
 export class JwtAuthService extends AuthService {
   private token: string;
+
+  private currentUser : User | undefined;
+    private currentUsername : string | undefined;
 
   login(username: string, password: string): Observable<boolean> {
     return this.http.post(`${this.getBaseUrl()}/authenticate`, {username, password}, {responseType: 'text'})
@@ -31,6 +36,20 @@ export class JwtAuthService extends AuthService {
   getBaseUrl(): string {
     return `${env.apiUrl}/auth/jwt`;
   }
+
+  getCurrentUsername(): string {
+      return this.currentUsername;
+    }
+
+     //-------Speicher usernamen durch einen post ab und hole mit get wieder-------
+      saveCurrentUsername(username: string): Observable<any>  {
+      return this.http.post('${this.getBaseUrl()}/current', username);
+      }
+
+      findCurrentUserAndGet(): Observable<any> {
+        return this.http.get('${this.getBaseUrl()}/current');
+      }
+
 
   get isLoggedIn(): boolean {
     return this.token != null;

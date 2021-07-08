@@ -36,8 +36,8 @@ export class AuthNewsService extends BaseNewsService {
     );
   }
 
-  create(headline: string, content: string): Observable<News> {
-    return this.http.post<any>(`${this._authService.getBaseUrl()}/news`, {headline, content}, {headers: this._authService.getAuthHeaders()}).pipe(
+  create(headline: string, content: string, username: string): Observable<News> {
+    return this.http.post<any>(`${this._authService.getBaseUrl()}/news`, {headline, content, username}, {headers: this._authService.getAuthHeaders()}).pipe(
       map(body => News.fromObject(body))
     );
   }
@@ -65,6 +65,7 @@ export class AuthNewsService extends BaseNewsService {
               map(body => user)
             );
           }
+
 
 
 

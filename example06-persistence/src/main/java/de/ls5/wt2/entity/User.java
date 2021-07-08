@@ -18,10 +18,20 @@ public class User {
 
     private String lastname;
 
+    private Boolean isCurrent;
+
 
     @Id
     @GeneratedValue
     private long id;
+
+    public void setCurrent(Boolean current) {
+        isCurrent = current;
+    }
+
+    public Boolean getCurrent() {
+        return isCurrent;
+    }
 
     public long getId() {
         return id;

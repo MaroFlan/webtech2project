@@ -49,6 +49,7 @@ public class NewsREST {
         news.setHeadline(param.getHeadline());
         news.setContent(param.getContent());
         news.setPublishedOn(new Date());
+        news.setUsername(param.getUsername());
 
         this.entityManager.persist(news);
 

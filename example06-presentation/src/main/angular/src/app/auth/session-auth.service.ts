@@ -4,10 +4,15 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { environment as env } from '../../environments/environment';
+import { User } from '../user';
+
 
 @Injectable()
 export class SessionAuthService extends AuthService {
   private loggedIn: boolean = false;
+
+  private currentUser : User | undefined;
+    private currentUsername : string | undefined;
 
   login(username: string, password: string): Observable<boolean> {
     const body = new HttpParams()
@@ -34,6 +39,22 @@ export class SessionAuthService extends AuthService {
       })
     );
   }
+
+  getCurrentUsername(): string {
+      console.log('sss');
+      return this.currentUsername;
+    }
+
+     //-------Speicher usernamen durch einen post ab und hole mit get wieder-------
+      saveCurrentUsername(username: string): Observable<any>  {
+      return this.http.post('${this.getBaseUrl()}/current', username);
+      }
+
+      findCurrentUserAndGet(): Observable<any> {
+        return this.http.get('${this.getBaseUrl()}/current');
+      }
+
+
 
   getAuthHeaders(): HttpHeaders {
     return new HttpHeaders();

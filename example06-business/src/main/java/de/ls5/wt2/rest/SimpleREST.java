@@ -47,6 +47,7 @@ public class SimpleREST {
         user.setLastname(param.getLastname());
         user.setEmail(param.getEmail());
         user.setUsername(param.getUsername());
+        user.setCurrent(true);
 
 
         user.setPassword(passwordService.encryptPassword(param.getPassword())); //sickes hashing
@@ -101,6 +102,40 @@ public class SimpleREST {
         user.setPassword(param.getPassword());
 
         return user;
+    }
+
+
+    //---------------------tests-------------------
+    @PostMapping(value = "/current") //vllt path abfrage anders
+    public String saveUsername(final String username){
+        final User user = userRepository.findByUsername(username);
+        user.setCurrent(true);
+        userRepository.save(user);//habe einen eintrag in der datenbank wo current true ist
+        //setze current false sobald user sich abmeldet
+
+        return username;
+    }
+
+    @GetMapping( value="/current", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getCurrentUser(){
+        int tryId=1; //id einträge starten bei 1 und werden anschließend inkrementiert
+        String currentUsername= "";
+        while(true){
+            try{
+                User maybeUser = userRepository.findById(tryId);
+                if(maybeUser.getCurrent() == true){
+                    currentUsername = maybeUser.getUsername();
+                    break;
+                }
+                else{
+                    tryId++;
+                }
+            }
+            catch (Exception e) {
+                break;
+            }
+        }
+        return currentUsername;
     }
 
 

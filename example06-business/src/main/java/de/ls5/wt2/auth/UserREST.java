@@ -37,7 +37,6 @@ public class UserREST {
     private UserRepository userRepository;
 
     //sorgt dafür dass der login funktioniert
-    //----aber login funktioniert noch nicht mit den userdaten----
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity getProfile() {
 

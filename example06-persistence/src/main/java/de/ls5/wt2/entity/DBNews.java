@@ -17,6 +17,15 @@ public class DBNews extends DBIdentified {
     private String content;
     private long UserId;
     private long id;
+    private String username;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(iso = ISO.DATE_TIME)

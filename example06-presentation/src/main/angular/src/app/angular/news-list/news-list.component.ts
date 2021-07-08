@@ -3,6 +3,8 @@ import { News } from '../../news';
 //import { HttpClient } from '@angular/common/http';
 import { NewsService } from '../news.service';
 import { Router } from '@angular/router';
+import { BasicAuthService } from '../../auth/basic-auth.service';
+
 
 
 @Component({
@@ -16,15 +18,18 @@ export class NewsListComponent {
   msg:string;//
   private url = "http://localhost:4200/rest/news";
 
- constructor(private newsService: NewsService, private router: Router) { }
+ constructor(private newsService: NewsService, private router: Router, private basicAuthService: BasicAuthService) { }
 
-  @Output()
-  public deleted = new EventEmitter();
-  public updated = new EventEmitter();
+
+  @Output() public deleted = new EventEmitter();
+  @Output() public updated = new EventEmitter();
 
 
   public headline: string = "";
   public content: string = "";
+
+  public currentUsername: string;
+  public messageUsername: string;
 
 
   @Input()
@@ -62,16 +67,31 @@ export class NewsListComponent {
       //console.log(e);
       var db_id= e.target[0].value;
 
-        this.newsService.delete(db_id).subscribe(
-          () => {
-            this.deleted.emit();
 
+     // console.log(this.headline);
+     // console.log(this.content);
+     // console.log(db_id);
+     //console.log(e.target[1].value);
+     //console.log(e.target[2].value);
 
-            //window.location.reload(); //virgin page refresh
-            this.router.navigate(['/']).then(() => { this.router.navigate(['/angular' ]); }) // chad fucking redirect (kill me now)
-          },
-          () => console.log("Error while deleting")
-        );
+     //get the username of message here
+
+    this.messageUsername = "";
+    this.currentUsername="AdminOfAdmins";
+
+          if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
+
+                this.newsService.delete(db_id).subscribe(
+                  () => {
+                    this.deleted.emit();
+
+                  },
+                  () => console.log("Error while deleting")
+                );
+          }
+          else{
+              console.log("This is not your message. You are not allowed to edit it");
+          }
       }
 
 
@@ -81,30 +101,52 @@ export class NewsListComponent {
 
       e.preventDefault();
 
+      this.basicAuthService.findCurrentUserAndGet().subscribe({ next: (activeUser) => this.currentUsername = activeUser }); //aufruf returned aktuell noch ein Unauthorized
+
+          this.currentUsername = 'User1';
+
+
 
       var db_id= e.target[0].value; //
      // console.log(this.headline);
      // console.log(this.content);
      // console.log(db_id);
+     console.log(e.target[1].value);
+     console.log(e.target[2].value);
 
+     //get the username of message here
+
+    this.messageUsername = "";
+    this.currentUsername="AdminOfAdmins";
+
+          if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
 
               this.newsService.update(this.headline, this.content, db_id).subscribe(
                 () => {
                   this.updated.emit();
+                  this.headline = "";
+                  this.content = "";
 
+          /*----------------------OUTDATED----------------------
                  let currentUrl = this.router.url;
-                  console.log(currentUrl);/*
+                  console.log(currentUrl);
                       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                           this.router.navigate([currentUrl]);
-                      });*/
+                      });
                   this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss //currentUrl
                 //  this.router.navigate([this.router.url])
+                  */
 
 
 
                 },
                 () => console.log("Error while updating")
               );
+          }
+
+          else{
+              console.log("This is not your message. You are not allowed to edit it");
+          }
     }
 
     getCharsLeft(): number {

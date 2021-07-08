@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { SessionAuthService } from '../../auth/session-auth.service';
 import { AuthComponent } from '../../auth/auth.component';
 import { User } from '../../user';
-//import { BasicAuthService } from '../../auth/basic-auth.service';
+import { BasicAuthService } from '../../auth/basic-auth.service';
 
 @Component({
   selector: 'wt2-create-news',
@@ -18,6 +18,7 @@ export class CreateNewsComponent {
   authComponent : AuthComponent;
 
  // public currentUser: User;
+ //public authService: AuthService;
 
   @Output()
   public created = new EventEmitter();
@@ -26,19 +27,29 @@ export class CreateNewsComponent {
   public content: string = "";
   public errorMessage: string;
   public userId: number;
+  public currentUsername: string;
 
-  constructor(private newsService: NewsService, //private basicAuthService: BasicAuthService
+  constructor(private newsService: NewsService, private basicAuthService: BasicAuthService//private newsService: NewsService, private authService: AuthService//private basicAuthService: BasicAuthService
   ) { }
 
   public createNews(e: Event): void {
     e.preventDefault();
     this.errorMessage = null;
 
-    // SecurityUtils.getSubject().checkRole("admin");//damit user abfragen?
-    //if(this.currentUser){  //this.currentUser = dem aktuellen user irgendwie
+    //-----somehow get the current username and save it on the messageOfHope
+    //console.log('1');
+    //this.currentUsername = this.basicAuthService.findCurrentUserAndGet(); //aufruf returned observable, dieser muss auf string gemappt werden
+
+    this.basicAuthService.findCurrentUserAndGet().subscribe({ next: (activeUser) => this.currentUsername = activeUser }); //aufruf returned aktuell noch ein Unauthorized
+    console.log(this.currentUsername);          //aufruf beim service evtl an dem auth-newsService orientieren
+    //console.log('2');
+    this.currentUsername = 'User1'; //solange der Unauthorized da ist, beispielUser für Testzwecke setzen
+                      //->sobald methodenaufruf funktioniert, ist die Anforderung damit komplett implementiert
+
+
 
         if (this.headline.trim() != null && this.content.trim() != null) {
-          this.newsService.create(this.headline, this.content).subscribe(
+          this.newsService.create(this.headline, this.content, this.currentUsername).subscribe(
             () => {
               this.created.emit();
               this.headline = "";
