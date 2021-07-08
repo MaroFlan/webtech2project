@@ -7,6 +7,8 @@
 
 
 ## Deployment
+* (If you dont get the application from version control, you might need to mvn package und java -jar the .war file instead of running the main application directly)
+
 
 * Run main application
 * navigate to example06-presentation/src/main/angular 
