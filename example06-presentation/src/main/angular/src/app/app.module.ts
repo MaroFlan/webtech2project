@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularComponent } from './angular/angular.component';
 import { AuthComponent } from './auth/auth.component';
-import { SecurityComponent } from './security/security.component';
 import { CreateNewsComponent } from './angular/create-news/create-news.component';
 import { NewsDetailsComponent } from './angular/news-details/news-details.component';
 //import { CreateNewsSecurityComponent } from './security/create-news-security/create-news-security.component';
@@ -28,7 +27,6 @@ import { BasicAuthService } from './auth/basic-auth.service';
     AppComponent,
     AngularComponent,
     AuthComponent,
-    SecurityComponent,
     CreateNewsComponent,
   //  CreateNewsSecurityComponent,
     CreateNewsAuthComponent,

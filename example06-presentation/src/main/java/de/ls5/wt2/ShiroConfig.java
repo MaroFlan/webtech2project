@@ -10,8 +10,6 @@ import de.ls5.wt2.auth.BasicAuthenticationFilterWithoutRedirect;
 import de.ls5.wt2.auth.FormAuthenticationFilterWithoutRedirect;
 import de.ls5.wt2.auth.LogoutFilterWithoutRedirect;
 import de.ls5.wt2.conf.auth.WT2Realm;
-import de.ls5.wt2.conf.auth.jwt.JWTAuthenticationFilter;
-import de.ls5.wt2.conf.auth.jwt.JWTWT2Realm;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.crypto.hash.DefaultHashService;
@@ -30,14 +28,10 @@ public class ShiroConfig {
         return new WT2Realm();
     }
 
-    @Bean
-    public Realm jwtRealm() {
-        return new JWTWT2Realm();
-    }
 
     @Bean
-    public DefaultWebSecurityManager securityManager(Realm realm, Realm jwtRealm) {
-        return new DefaultWebSecurityManager(Arrays.asList(jwtRealm, realm));
+    public DefaultWebSecurityManager securityManager(Realm realm) {
+        return new DefaultWebSecurityManager(Arrays.asList( realm));
     }
 
     @Bean
@@ -50,7 +44,6 @@ public class ShiroConfig {
         filters.put("restAuthenticator", new BasicAuthenticationFilterWithoutRedirect());
         filters.put("loginFilter", new FormAuthenticationFilterWithoutRedirect());
         filters.put("logoutFilter", new LogoutFilterWithoutRedirect());
-        filters.put("jwtFilter", new JWTAuthenticationFilter());
 
 
         final Map<String, String> chainDefinition = new LinkedHashMap<>();
@@ -58,9 +51,6 @@ public class ShiroConfig {
         // configuration for stateless authentication on each request
         chainDefinition.put("/rest/auth/basic/**", "noSessionCreation, restAuthenticator");
 
-        // configuration for JWT based authentication
-        chainDefinition.put("/rest/auth/jwt/authenticate", "anon");
-        chainDefinition.put("/rest/auth/jwt/**", "noSessionCreation, jwtFilter");
 
         // configuration for using session based authentication
         chainDefinition.put("/login.jsp", "loginFilter");

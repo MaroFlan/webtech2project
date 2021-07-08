@@ -3,13 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AngularComponent } from './angular/angular.component';
 import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './register/register.component';
-import { SecurityComponent } from './security/security.component';
 import { AccountComponent } from './angular/account/account.component';
 
 const routes: Routes = [
   { path: 'angular', component: AngularComponent},
   { path: 'auth', component: AuthComponent},
-  { path: 'security', component: SecurityComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'account', component: AccountComponent},
   { path: '',
