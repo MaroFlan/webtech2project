@@ -21,6 +21,7 @@
  * Users can now view messages when they arent logged in (but not create/edit/delete)
  * Login directs to secured /auth route 
  * components refresh correctly after a message was edited/deleted when logged in
+ * a lot of unused files and code snippets were removed
 
 ## Added but not 100% functional 
 (mainly because of unauthorized request and lack of time)
