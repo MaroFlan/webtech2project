@@ -30,6 +30,7 @@ export class NewsListComponent {
 
   public currentUsername: string;
   public messageUsername: string;
+  public news1: any;
 
 
   @Input()
@@ -66,18 +67,20 @@ export class NewsListComponent {
       //this.errorMessage = null;
       //console.log(e);
       var db_id= e.target[0].value;
+      
 
 
-     // console.log(this.headline);
+      console.log(e.target[0].username);
      // console.log(this.content);
      // console.log(db_id);
      //console.log(e.target[1].value);
      //console.log(e.target[2].value);
 
      //get the username of message here
-
-    this.messageUsername = "";
-    this.currentUsername="AdminOfAdmins";
+    
+    //this.news1 = this.newsService.getCreator(db_id);
+    console.log(this.news1);
+    this.currentUsername = document.cookie;
 
           if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
 
@@ -116,8 +119,8 @@ export class NewsListComponent {
 
      //get the username of message here
 
-    this.messageUsername = "";
-    this.currentUsername="AdminOfAdmins";
+    //this.messageUsername = this.newsService.getCreator(db_id).toString();
+    this.currentUsername = document.cookie;
 
           if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
 

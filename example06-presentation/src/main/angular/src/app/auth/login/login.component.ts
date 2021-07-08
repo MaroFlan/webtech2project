@@ -27,9 +27,11 @@ export class LoginComponent {
     this.errorMessage = null;
     if (this.username.trim() !== "" && this.password.trim() !== "") {
       this.authService.login(this.username, this.password).subscribe(
-
-        () => {this.loggedIn.emit();
-        this.router.navigate(['/']).then(() => { this.router.navigate(['/auth']); }) //bei succesful login wird auf msg page weitergeleitet
+        
+        () => {
+          document.cookie = this.username;
+          this.loggedIn.emit();
+          this.router.navigate(['/']).then(() => { this.router.navigate(['/auth']); }) //bei succesful login wird auf msg page weitergeleitet
         },
         () => this.errorMessage = "Failed to login"
       );

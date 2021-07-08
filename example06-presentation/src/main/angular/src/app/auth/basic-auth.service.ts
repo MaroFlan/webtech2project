@@ -50,6 +50,7 @@ export class BasicAuthService extends AuthService {
 
   logout(): Observable<boolean> {
     this.token = null;
+    document.cookie = "";
     return of(true);
   }
 

@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { BasicAuthService } from './basic-auth.service';
 import { AuthService } from './auth.service';
 import {User} from '../user';
+import { updateShorthandPropertyAssignment } from 'typescript';
 
 
 @Injectable()
@@ -43,16 +44,22 @@ export class AuthNewsService extends BaseNewsService {
   }
 
   delete(id: number): Observable<News> {
-        return this.http.delete<any>(`${this._authService.getBaseUrl()}/news/${id}`, {headers: this.defaultHeaders}).pipe(
-          map(body => News.fromObject(body))
-        );
-      }
+    return this.http.delete<any>(`${this._authService.getBaseUrl()}/news/${id}`, {headers: this.defaultHeaders}).pipe(
+      map(body => News.fromObject(body))
+    );
+  }
 
   update(headline: string, content: string, id: number): Observable<News> {
-          return this.http.put<any>(`${this._authService.getBaseUrl()}/news/${id}`, {headline, content}, {headers: this.defaultHeaders}).pipe(
-            map(body => News.fromObject(body))
-          );
-        }
+    return this.http.put<any>(`${this._authService.getBaseUrl()}/news/${id}`, {headline, content}, {headers: this.defaultHeaders}).pipe(
+      map(body => News.fromObject(body))
+    );
+  }
+  
+  getNews(id: number): Observable<News> {
+    return this.http.get<any>(`${this._authService.getBaseUrl()}/news/${id}`, {headers: this._authService.getAuthHeaders()}).pipe(
+      map(body => News.fromObject(body))
+    );
+  }
 
   set authService(value: AuthService) {
     this._authService = value;

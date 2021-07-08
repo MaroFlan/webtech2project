@@ -109,7 +109,7 @@ public class AuthNewsREST {
         final User user = userRepository.findByUsername(username);
         user.setCurrent(true);
         userRepository.save(user);//habe einen eintrag in der datenbank wo current true ist
-
+        console.log('saveUsername:' + username);
 
         return username;
     }
@@ -121,7 +121,7 @@ public class AuthNewsREST {
         user.setCurrent(false);
         userRepository.save(user);
         //setze current false sobald user sich abmeldet
-
+        
         return username;
     }
 

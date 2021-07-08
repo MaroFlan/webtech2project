@@ -34,16 +34,22 @@ export class NewsService extends BaseNewsService {
   }
 
   delete(id: number): Observable<News> {
-      return this.http.delete<any>(`${env.apiUrl}/news/${id}`, {headers: this.defaultHeaders}).pipe(
-        map(body => News.fromObject(body))
-      );
-    }
+    return this.http.delete<any>(`${env.apiUrl}/news/${id}`, {headers: this.defaultHeaders}).pipe(
+      map(body => News.fromObject(body))
+    );
+  }
 
-    update(headline: string, content: string, id: number): Observable<News> {
-        return this.http.put<any>(`${env.apiUrl}/news/${id}`, {headline, content}, {headers: this.defaultHeaders}).pipe(
-          map(body => News.fromObject(body))
-        );
-      }
+  update(headline: string, content: string, id: number): Observable<News> {
+    return this.http.put<any>(`${env.apiUrl}/news/${id}`, {headline, content}, {headers: this.defaultHeaders}).pipe(
+      map(body => News.fromObject(body))
+    );
+  }
+  
+  // getCreator(id: number): Observable<any> {
+  //   return this.http.get<any>(`${env.apiUrl}/news/${id}`, {headers: this.defaultHeaders}).pipe(
+  //     map(body => News.fromObject(body))
+  //   );
+  // }
 
     //---------------ab hier user methoden-------------(firstname: string, lastname: string, email: string, username: string, password: string)
 
