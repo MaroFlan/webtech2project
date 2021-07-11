@@ -6,6 +6,7 @@ import { SessionAuthService } from '../../auth/session-auth.service';
 import { AuthComponent } from '../../auth/auth.component';
 import { User } from '../../user';
 import { BasicAuthService } from '../../auth/basic-auth.service';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'wt2-create-news',
@@ -36,15 +37,20 @@ export class CreateNewsComponent {
     e.preventDefault();
     this.errorMessage = null;
 
-    //-----somehow get the current username and save it on the messageOfHope
-    //console.log('1');
-    //this.currentUsername = this.basicAuthService.findCurrentUserAndGet(); //aufruf returned observable, dieser muss auf string gemappt werden
 
-    this.basicAuthService.findCurrentUserAndGet().subscribe({ next: (activeUser) => this.currentUsername = activeUser }); //aufruf returned aktuell noch ein Unauthorized
-    console.log(this.currentUsername);          //aufruf beim service evtl an dem auth-newsService orientieren
-    //console.log('2');
-    this.currentUsername = document.cookie; //solange der Unauthorized da ist, beispielUser für Testzwecke setzen
-                      //->sobald methodenaufruf funktioniert, ist die Anforderung damit komplett implementiert
+    //this.currentUsername = document.cookie;
+
+    //extrahiere Usernamen aus dem Cookie
+    const cookie = document.cookie.split(',');
+    const username = cookie[0];
+    const hash = cookie[1];
+
+    //ist immer true AUßER jemand ändert den Cookie Inhalt oder der Cookie wurde bspw invalidiert
+    if(bcrypt.compareSync(username, hash) ){this.currentUsername = username;}
+    else{this.errorMessage = 'invalid cookie'; return }
+
+    //console.log(username);
+    //console.log(hash);
 
 
 

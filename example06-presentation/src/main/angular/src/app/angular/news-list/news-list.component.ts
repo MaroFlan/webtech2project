@@ -4,6 +4,7 @@ import { News } from '../../news';
 import { NewsService } from '../news.service';
 import { Router } from '@angular/router';
 import { BasicAuthService } from '../../auth/basic-auth.service';
+import * as bcrypt from 'bcryptjs';
 
 
 
@@ -31,6 +32,8 @@ export class NewsListComponent {
   public currentUsername: string;
   public messageUsername: string;
   public news1: any;
+
+  public salt: string = bcrypt.genSaltSync(10);
 
 
   @Input()
@@ -67,7 +70,7 @@ export class NewsListComponent {
       //this.errorMessage = null;
       //console.log(e);
       var db_id= e.target[0].value;
-      
+
 
 
       //console.log(e.target[0].username);
@@ -77,27 +80,29 @@ export class NewsListComponent {
      //console.log(e.target[2].value);
 
      //get the username of message here
-    
+
     //this.news1 = this.newsService.getCreator(db_id);
     this.messageUsername = username;
-    this.currentUsername = document.cookie;
-    console.log("Logged Username:" + this.currentUsername + ", Creator Username: " + this.messageUsername);
 
-          if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
+        const cookie = document.cookie.split(',');
+            this.currentUsername = cookie[0];
+            const hash = cookie[1];
 
+            if(bcrypt.compareSync(this.messageUsername, hash ) || bcrypt.compareSync("AdminOfAdmins", hash)){
             console.log("Identity check successful");
-                this.newsService.delete(db_id).subscribe(
-                  () => {
-                    this.deleted.emit();
-                    console.log("Message deleted");
-                  },
-                  () => console.log("Error while deleting")
-                );
-          }
-          else{
-              console.log("This is not your message. You are not allowed to edit it");
-          }
-      }
+                            this.newsService.delete(db_id).subscribe(
+                              () => {
+                                this.deleted.emit();
+                                console.log("Message deleted");
+                              },
+                              () => console.log("Error while deleting")
+                            );
+                      }
+                      else{
+                          console.log("This is not your message. You are not allowed to edit it");
+                      }
+                  }
+
 
 
 
@@ -122,37 +127,39 @@ export class NewsListComponent {
      //get the username of message here
     this.messageUsername = username;
     //this.messageUsername = this.newsService.getCreator(db_id).toString();
+
+
+
     this.currentUsername = document.cookie;
-    console.log("Logged Username:" + this.currentUsername + ", Creator Username: " + this.messageUsername);
-          if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
-            console.log("Identity check successful");
-              this.newsService.update(this.headline, this.content, db_id).subscribe(
-                () => {
-                  this.updated.emit();
-                  this.headline = "";
-                  this.content = "";
+    const cookie = document.cookie.split(',');
+        this.currentUsername = cookie[0];
+        const hash = cookie[1];
 
-          /*----------------------OUTDATED----------------------
-                 let currentUrl = this.router.url;
-                  console.log(currentUrl);
-                      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                          this.router.navigate([currentUrl]);
-                      });
-                  this.router.navigate(['/']).then(() => { this.router.navigate([currentUrl]); }) // rausfinden wo der redirect hin muss //currentUrl
-                //  this.router.navigate([this.router.url])
-                  */
+        if(bcrypt.compareSync(this.messageUsername, hash ) || bcrypt.compareSync("AdminOfAdmins", hash)){
+        console.log("Identity check successful");
+                      this.newsService.update(this.headline, this.content, db_id).subscribe(
+                        () => {
+                          this.updated.emit();
+                          this.headline = "";
+                          this.content = "";
 
 
-                      console.log("Message updated");
-                },
-                () => console.log("Error while updating")
-              );
-          }
 
-          else{
-              console.log("This is not your message. You are not allowed to edit it");
-          }
-    }
+                              console.log("Message updated");
+                        },
+                        () => console.log("Error while updating")
+                      );
+                  }
+
+                  else{
+                      console.log("This is not your message. You are not allowed to edit it");
+                  }
+            }
+        //console.log(hash);
+        //console.log(bcrypt.hashSync(this.messageUsername, this.salt));
+
+
+
 
     getCharsLeft(): number {
         return 255 - this.content.length; //anpassbar, sodass auch headline länge überprüft wird

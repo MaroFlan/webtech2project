@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'wt2-login',
@@ -10,6 +11,10 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   constructor(private router: Router) { }
+
+  //salt
+  public salt: string = bcrypt.genSaltSync(10);
+
 
 
   @Input()
@@ -27,9 +32,12 @@ export class LoginComponent {
     this.errorMessage = null;
     if (this.username.trim() !== "" && this.password.trim() !== "") {
       this.authService.login(this.username, this.password).subscribe(
-        
+
         () => {
-          document.cookie = this.username;
+        //hash
+        document.cookie = this.username + "," + bcrypt.hashSync(this.username, this.salt);
+        console.log(document.cookie);
+          //document.cookie = this.username;
           this.loggedIn.emit();
           this.router.navigate(['/']).then(() => { this.router.navigate(['/auth']); }) //bei succesful login wird auf msg page weitergeleitet
         },
