@@ -45,11 +45,11 @@ export class NewsService extends BaseNewsService {
     );
   }
   
-  // getCreator(id: number): Observable<any> {
-  //   return this.http.get<any>(`${env.apiUrl}/news/${id}`, {headers: this.defaultHeaders}).pipe(
-  //     map(body => News.fromObject(body))
-  //   );
-  // }
+  getAuthor(id: number): Observable<string> {
+    return this.http.get<News>(`${env.apiUrl}/news/${id}`, {headers: this.defaultHeaders}).pipe(
+      map(news => news.username as string),
+    );
+  }
 
     //---------------ab hier user methoden-------------(firstname: string, lastname: string, email: string, username: string, password: string)
 

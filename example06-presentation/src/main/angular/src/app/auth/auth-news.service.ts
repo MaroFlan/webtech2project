@@ -61,6 +61,12 @@ export class AuthNewsService extends BaseNewsService {
     );
   }
 
+  getAuthor(id: number): Observable<string> {
+    return this.http.get<News>(`${this._authService.getBaseUrl()}/news/${id}/news/${id}`, {headers: this._authService.getAuthHeaders()}).pipe(
+      map(news => news.username as string),
+    );
+  }
+
   set authService(value: AuthService) {
     this._authService = value;
   }

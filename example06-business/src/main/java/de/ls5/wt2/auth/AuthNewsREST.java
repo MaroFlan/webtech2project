@@ -1,5 +1,6 @@
 package de.ls5.wt2.auth;
 
+import java.io.Console;
 import java.util.Date;
 import java.util.List;
 
@@ -109,8 +110,7 @@ public class AuthNewsREST {
         final User user = userRepository.findByUsername(username);
         user.setCurrent(true);
         userRepository.save(user);//habe einen eintrag in der datenbank wo current true ist
-        console.log('saveUsername:' + username);
-
+        //console.log("saveUsername:" + username);
         return username;
     }
 

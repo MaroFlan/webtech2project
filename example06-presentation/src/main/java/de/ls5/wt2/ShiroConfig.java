@@ -6,19 +6,18 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 
-import de.ls5.wt2.auth.BasicAuthenticationFilterWithoutRedirect;
-import de.ls5.wt2.auth.FormAuthenticationFilterWithoutRedirect;
-import de.ls5.wt2.auth.LogoutFilterWithoutRedirect;
-import de.ls5.wt2.conf.auth.WT2Realm;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.crypto.hash.DefaultHashService;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import de.ls5.wt2.auth.BasicAuthenticationFilterWithoutRedirect;
+import de.ls5.wt2.auth.FormAuthenticationFilterWithoutRedirect;
+import de.ls5.wt2.auth.LogoutFilterWithoutRedirect;
+import de.ls5.wt2.conf.auth.WT2Realm;
 
 @Configuration
 public class ShiroConfig {
