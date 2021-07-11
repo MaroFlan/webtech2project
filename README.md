@@ -20,3 +20,4 @@
 ## Whats Changed (Update 11.07.)
  * Created messages show the creator's username. Only the creator can edit or delete messages.
  * The admin can create an account with the username "AdminOfAdmins" to gain full control over all messages.
+ * Website title and icon individualized
