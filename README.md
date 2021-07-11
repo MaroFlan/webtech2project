@@ -20,4 +20,6 @@
 ## Whats Changed (Update 11.07.)
  * Created messages show the creator's username. Only the creator can edit or delete messages.
  * The admin can create an account with the username "AdminOfAdmins" to gain full control over all messages.
- * Website title and icon individualized
+ * Website title and icon individualized.
+ * Cookies include the hashed username (with a random salt).
+ * Changing a cookie invalidates all foreign input (which means that you are still able to edit/delete your own messages).
