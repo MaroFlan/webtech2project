@@ -40,8 +40,8 @@ export class CreateNewsComponent {
     //console.log('1');
     //this.currentUsername = this.basicAuthService.findCurrentUserAndGet(); //aufruf returned observable, dieser muss auf string gemappt werden
 
-    this.basicAuthService.findCurrentUserAndGet().subscribe({ next: (activeUser) => this.currentUsername = activeUser }); //aufruf returned aktuell noch ein Unauthorized
-    console.log(this.currentUsername);          //aufruf beim service evtl an dem auth-newsService orientieren
+    //this.basicAuthService.findCurrentUserAndGet().subscribe({ next: (activeUser) => this.currentUsername = activeUser }); //aufruf returned aktuell noch ein Unauthorized
+    //console.log(this.currentUsername);          //aufruf beim service evtl an dem auth-newsService orientieren
     //console.log('2');
     this.currentUsername = document.cookie; //solange der Unauthorized da ist, beispielUser für Testzwecke setzen
                       //->sobald methodenaufruf funktioniert, ist die Anforderung damit komplett implementiert

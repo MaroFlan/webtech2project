@@ -63,7 +63,7 @@ public class SecurityNewsREST {
 
         news.setHeadline(param.getHeadline());
         // news.setContent(param.getContent());
-        news.setPublishedOn(new Date());
+       //news.setPublishedOn(new Date());
 
         this.entityManager.persist(news);
         this.entityManager.flush();

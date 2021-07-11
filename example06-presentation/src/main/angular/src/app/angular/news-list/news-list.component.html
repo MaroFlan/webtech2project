@@ -7,7 +7,7 @@
 
 
     <div class="w-100 mr-2"> <small> published by: {{n.username}}</small>
-     <div> <small>{{n.publishedOn | date:mediumDate}}</small> <span class="badge badge-warning" *ngIf="i == 0">Latest Message of Hope</span>
+     <div> <small>{{n.publishedOn<!--| date:mediumDate}-->}}</small> <span class="badge badge-warning" *ngIf="i == 0">Latest Message of Hope</span>
        </div>
 
       <h5 class="mb-0">{{n.headline}} <!--{{n.id}}--> </h5>
@@ -15,7 +15,7 @@
     </div>
     <div>
 
-      <form #f="ngForm" class="edit-form" (submit)="updateNews($event)" id="edit-form-{{n.id}}">
+      <form #f="ngForm" class="edit-form" (submit)="updateNews($event, n.publishedOn)" id="edit-form-{{n.id}}">
         <input type="hidden" name="id" value="{{n.id}}"/>
 
 

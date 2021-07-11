@@ -28,7 +28,9 @@ public class StartupBean implements ApplicationListener<ContextRefreshedEvent> {
 
             news.setHeadline("Startup");
             news.setContent("Startup Bean successfully executed");
-            news.setPublishedOn(new Date());
+            String date = new Date().toString();
+           // news.setPublishedOn(new Date());
+            news.setPublishedOn(date);
 
             this.entityManager.persist(news);
         }

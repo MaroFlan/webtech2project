@@ -12,7 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Entity
 public class DBNews extends DBIdentified {
 
-    private Date publishedOn;
+   //private Date publishedOn;
+    private String publishedOn;
     private String headline;
     private String content;
     private long UserId;
@@ -27,13 +28,13 @@ public class DBNews extends DBIdentified {
         return username;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(iso = ISO.DATE_TIME)
-    public Date getPublishedOn() {
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @DateTimeFormat(iso = ISO.DATE_TIME)
+    public String getPublishedOn() {
         return publishedOn;
     }
 
-    public void setPublishedOn(Date publishedOn) {
+    public void setPublishedOn(String publishedOn) {
         this.publishedOn = publishedOn;
     }
 

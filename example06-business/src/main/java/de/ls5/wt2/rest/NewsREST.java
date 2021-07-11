@@ -48,8 +48,10 @@ public class NewsREST {
 
         news.setHeadline(param.getHeadline());
         news.setContent(param.getContent());
-        news.setPublishedOn(new Date());
+        //news.setPublishedOn(new Date());
         news.setUsername(param.getUsername());
+        news.setPublishedOn(param.getUsername());
+
 
         this.entityManager.persist(news);
 
@@ -124,7 +126,7 @@ public class NewsREST {
 
         news.setHeadline(headline);
         news.setContent(content);
-        news.setPublishedOn(new Date());
+        //news.setPublishedOn(new Date());
 
         this.entityManager.persist(news);
 

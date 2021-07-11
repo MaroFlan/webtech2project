@@ -95,7 +95,9 @@ public class AuthNewsREST {
 
         news.setHeadline(param.getHeadline());
         news.setContent(param.getContent());
-        news.setPublishedOn(new Date());
+        // news.setPublishedOn(new Date());
+        news.setUsername(param.getUsername());
+        news.setPublishedOn(param.getUsername());
 
         this.entityManager.persist(news);
 
@@ -109,7 +111,7 @@ public class AuthNewsREST {
         final User user = userRepository.findByUsername(username);
         user.setCurrent(true);
         userRepository.save(user);//habe einen eintrag in der datenbank wo current true ist
-        console.log('saveUsername:' + username);
+        //console.log('saveUsername:' + username);
 
         return username;
     }

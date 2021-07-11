@@ -67,7 +67,7 @@ export class NewsListComponent {
       //this.errorMessage = null;
       //console.log(e);
       var db_id= e.target[0].value;
-      
+
 
 
       console.log(e.target[0].username);
@@ -77,7 +77,7 @@ export class NewsListComponent {
      //console.log(e.target[2].value);
 
      //get the username of message here
-    
+
     //this.news1 = this.newsService.getCreator(db_id);
     console.log(this.news1);
     this.currentUsername = document.cookie;
@@ -100,7 +100,7 @@ export class NewsListComponent {
 
 
 
-    public updateNews(e: Event): void {
+    public updateNews(e: Event, username: string): void {
 
       e.preventDefault();
 
@@ -121,8 +121,12 @@ export class NewsListComponent {
 
     //this.messageUsername = this.newsService.getCreator(db_id).toString();
     this.currentUsername = document.cookie;
+    console.log('-------');
+    console.log(this.currentUsername);
+    console.log(username);
+    console.log('-------');
 
-          if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
+          if(this.currentUsername == username || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
 
               this.newsService.update(this.headline, this.content, db_id).subscribe(
                 () => {

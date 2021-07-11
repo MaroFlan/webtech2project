@@ -1,5 +1,5 @@
 export class News {
-  publishedOn: Date;
+  publishedOn: string;
   headline: string;
   content: string;
   userId: number;
@@ -10,7 +10,7 @@ export class News {
     const n = new News();
     n.headline = object.headline;
     n.content = object.content;
-    n.publishedOn = new Date(object.publishedOn);
+    n.publishedOn = object.publishedOn;
     n.id = object.id;
     n.userId = object.userId;
     n.username = object.username;
