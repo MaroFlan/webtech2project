@@ -15,7 +15,7 @@
     </div>
     <div>
 
-      <form #f="ngForm" class="edit-form" (submit)="updateNews($event)" id="edit-form-{{n.id}}">
+      <form #f="ngForm" class="edit-form" (submit)="updateNews($event, n.username)" id="edit-form-{{n.id}}">
         <input type="hidden" name="id" value="{{n.id}}"/>
 
 
@@ -39,7 +39,7 @@
       </button>
 
 
-      <form (submit)="deleteNews($event)" (deleted)="load()">
+      <form (submit)="deleteNews($event, n.username)" (deleted)="load()">
         <input type="hidden" name="id" value="{{n.id}}"/>
         <button class="btn" >
 

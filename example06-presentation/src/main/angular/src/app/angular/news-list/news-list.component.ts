@@ -61,7 +61,7 @@ export class NewsListComponent {
  }
 
 
-  public deleteNews(e: Event): void {
+  public deleteNews(e: Event, username: string): void {
 
       e.preventDefault();
       //this.errorMessage = null;
@@ -70,7 +70,7 @@ export class NewsListComponent {
       
 
 
-      console.log(e.target[0].username);
+      //console.log(e.target[0].username);
      // console.log(this.content);
      // console.log(db_id);
      //console.log(e.target[1].value);
@@ -79,15 +79,17 @@ export class NewsListComponent {
      //get the username of message here
     
     //this.news1 = this.newsService.getCreator(db_id);
-    console.log(this.news1);
+    this.messageUsername = username;
     this.currentUsername = document.cookie;
+    console.log("Logged Username:" + this.currentUsername + ", Creator Username: " + this.messageUsername);
 
           if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
 
+            console.log("Identity check successful");
                 this.newsService.delete(db_id).subscribe(
                   () => {
                     this.deleted.emit();
-
+                    console.log("Message deleted");
                   },
                   () => console.log("Error while deleting")
                 );
@@ -100,13 +102,13 @@ export class NewsListComponent {
 
 
 
-    public updateNews(e: Event): void {
+    public updateNews(e: Event, username: string): void {
 
       e.preventDefault();
 
-      this.basicAuthService.findCurrentUserAndGet().subscribe({ next: (activeUser) => this.currentUsername = activeUser }); //aufruf returned aktuell noch ein Unauthorized
+      //this.basicAuthService.findCurrentUserAndGet().subscribe({ next: (activeUser) => this.currentUsername = activeUser }); //aufruf returned aktuell noch ein Unauthorized
 
-          this.currentUsername = 'User1';
+         // this.currentUsername = 'User1';
 
 
 
@@ -114,16 +116,16 @@ export class NewsListComponent {
      // console.log(this.headline);
      // console.log(this.content);
      // console.log(db_id);
-     console.log(e.target[1].value);
-     console.log(e.target[2].value);
+     console.log("headline update: " + e.target[1].value);
+     console.log("content update: " + e.target[2].value);
 
      //get the username of message here
-
+    this.messageUsername = username;
     //this.messageUsername = this.newsService.getCreator(db_id).toString();
     this.currentUsername = document.cookie;
-
+    console.log("Logged Username:" + this.currentUsername + ", Creator Username: " + this.messageUsername);
           if(this.currentUsername == this.messageUsername || this.currentUsername == "AdminOfAdmins"){ //AdminOfAdmins is the name of the Admin Account. He is allowed to do everything
-
+            console.log("Identity check successful");
               this.newsService.update(this.headline, this.content, db_id).subscribe(
                 () => {
                   this.updated.emit();
@@ -141,7 +143,7 @@ export class NewsListComponent {
                   */
 
 
-
+                      console.log("Message updated");
                 },
                 () => console.log("Error while updating")
               );
